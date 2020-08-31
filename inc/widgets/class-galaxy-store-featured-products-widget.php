@@ -13,22 +13,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
+if ( ! class_exists( 'Galaxy_Store_Featured_Products_Widget' ) ) {
 
 	/**
 	 * Class file for creating the section widget.
 	 */
-	class Galaxy_Store_Banner_Widget extends WP_Widget {
+	class Galaxy_Store_Featured_Products_Widget extends WP_Widget {
 
 		/**
 		 * Sets up the widgets name etc.
 		 */
 		public function __construct() {
 			$widget_ops = array(
-				'classname'   => 'Galaxy_Store_Banner_Widget',
-				'description' => __( 'Banner widget section for frontpage.', 'galaxy-store' ),
+				'classname'   => 'Galaxy_Store_Featured_Products_Widget',
+				'description' => __( 'Featured products listing widget for frontpage section.', 'galaxy-store' ),
 			);
-			parent::__construct( 'Galaxy_Store_Banner_Widget', 'Galaxy Store Banner', $widget_ops );
+			parent::__construct( 'Galaxy_Store_Featured_Products_Widget', 'Galaxy Store Featured Products', $widget_ops );
 		}
 
 		/**
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			get_template_part( 'template-parts/frontpage/banner' );
+			get_template_part( 'template-parts/frontpage/featured-products' );
 		}
 
 		/**
@@ -83,13 +83,13 @@ if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
 }
 
 
-if ( ! function_exists( 'galaxy_store_banner_widget' ) ) {
+if ( ! function_exists( 'galaxy_store_featured_products_widget' ) ) {
 
 	/**
 	 * Init widget.
 	 */
-	function galaxy_store_banner_widget() {
-		register_widget( 'Galaxy_Store_Banner_Widget' );
+	function galaxy_store_featured_products_widget() {
+		register_widget( 'Galaxy_Store_Featured_Products_Widget' );
 	}
-	add_action( 'widgets_init', 'galaxy_store_banner_widget' );
+	add_action( 'widgets_init', 'galaxy_store_featured_products_widget' );
 }

@@ -223,3 +223,16 @@ if ( class_exists( 'WooCommerce' ) ) {
  * All the frontpage widgets.
  */
 require get_template_directory() . '/inc/widgets/class-galaxy-store-banner-widget.php';
+require get_template_directory() . '/inc/widgets/class-galaxy-store-product-categories-widget.php';
+require get_template_directory() . '/inc/widgets/class-galaxy-store-featured-products-widget.php';
+require get_template_directory() . '/inc/widgets/class-galaxy-store-product-offers-widget.php';
+require get_template_directory() . '/inc/widgets/class-galaxy-store-recent-posts-widget.php';
+require get_template_directory() . '/inc/widgets/class-galaxy-store-call-to-action-widget.php';
+require get_template_directory() . '/inc/widgets/class-galaxy-store-services-widget.php';
+require get_template_directory() . '/inc/widgets/class-galaxy-store-clients-widget.php';
+require get_template_directory() . '/inc/widgets/class-galaxy-store-category-menus-widget.php';
+
+
+
+
+
