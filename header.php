@@ -22,7 +22,6 @@
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<div id="page" class="site">
 
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'galaxy-store' ); ?></a>
 
@@ -31,33 +30,18 @@
 			<div class="container">
 				<div class="d-flex align-items-center">
 					<div class="topbar-left">
-						<!-- <div class="intro-text">
-							<a href="#" class="">Welcome to The Store</a>
-						</div> -->
-						<div class="top-nav">
-							<ul>
-								<li>
-									<a href="#">
-										shop
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										about
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										contact
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										blog
-									</a>
-								</li>
-							</ul>
-						</div>
+
+						<?php
+						wp_nav_menu(
+							array(
+								'container'       => 'div',
+								'container_class' => 'top-nav',
+								'fallback_cb'     => 'galaxy_store_nav_menu_fallback',
+								'theme_location'  => 'top-bar',
+							)
+						);
+						?>
+
 					</div>
 
 					<div class="topbar-right ml-auto">
@@ -113,11 +97,32 @@
 		<div class="main-header">
 			<div class="container">
 				<div class="firstrow clearfix">
-					<div class="logo">
-						<a href="index.html">
-							<img src="images/logo.png" alt="logo">
-						</a>
-					</div>
+
+
+					<?php if ( has_custom_logo() || get_bloginfo() || get_bloginfo( 'description' ) ) { ?>
+						<div class="logo">
+							<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<?php the_custom_logo(); ?>
+
+								<?php if ( get_bloginfo() || get_bloginfo( 'description' ) ) { ?>
+									<div class="site-branding-text" >
+										<?php if ( get_bloginfo() ) { ?>
+											<h1 class="site-title">
+												<?php echo esc_html( get_bloginfo() ); ?>
+											</h1>
+										<?php } ?>
+										<?php if ( get_bloginfo( 'description' ) ) { ?>
+											<p class="site-tagline">
+												<?php echo esc_html( get_bloginfo( 'description' ) ); ?>
+											</p>
+										<?php } ?>
+									</div>
+								<?php } ?>
+							</a>
+						</div>
+					<?php } ?>
+
+
 					<div class="header-cart">
 						<div class="d-xl-none">
 							<a href="">
@@ -161,6 +166,8 @@
 				</div>
 
 				<div class="secondrow clearfix">
+
+
 					<div class="category-section">
 						<div class="category-header">
 							All Departments
@@ -218,224 +225,21 @@
 							</li>
 						</ul>
 					</div>
-					<div class="main-navigation">
-						<ul class="clearfix">
-							<li class="active">
-								<a href="#">
-									Home
-								</a>
-							</li>
-							<li class="has-sub-menu">
-								<a href="#">
-									Shop <i class="icon-arrow-down"></i>
-								</a>
-								<div class="mega-menu clearfix">
-									<div class="mega-sec">
-										<h2>Electronics</h2>
-										<ul class="mega-sub-menu">
-											<li>
-												<a href="">
-													Example 1
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 2
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 3
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 4
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 5
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 6
-												</a>
-											</li>
-										</ul>
-									</div>
-									<div class="mega-sec">
-										<h2>Accesories</h2>
-										<ul class="mega-sub-menu">
-											<li>
-												<a href="">
-													Example 1
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 2
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 3
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 4
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 5
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 6
-												</a>
-											</li>
-										</ul>
-									</div>
-									<div class="mega-sec">
-										<h2>Gadgets</h2>
-										<ul class="mega-sub-menu">
-											<li>
-												<a href="">
-													Example 1
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 2
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 3
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 4
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 5
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 6
-												</a>
-											</li>
-										</ul>
-									</div>
-									<div class="mega-sec">
-										<h2>Food</h2>
-										<ul class="mega-sub-menu">
-											<li>
-												<a href="">
-													Example 1
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 2
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 3
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 4
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 5
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 6
-												</a>
-											</li>
-										</ul>
-									</div>
-									<div class="mega-sec">
-										<h2>Accesories</h2>
-										<ul class="mega-sub-menu">
-											<li>
-												<a href="">
-													Example 1
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 2
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 3
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 4
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 5
-												</a>
-											</li>
-											<li>
-												<a href="">
-													Example 6
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li>
-								<a href="#">
-									About Us
-								</a>
-							</li>
-							<li class="has-sub-menu">
-								<a href="#">
-									Blog Page <i class="icon-arrow-down"></i>
-								</a>
-								<ul class="sub-menu">
-									<li>
-										<a href="">
-											Blog single page
-										</a>
-									</li>
-									<li>
-										<a href="">
-											Blog grid
-										</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">
-									Contact Us
-								</a>
-							</li>
-						</ul>
-					</div>
+
+
+					<?php
+					wp_nav_menu(
+						array(
+							'container'       => 'div',
+							'container_class' => 'main-navigation',
+							'menu_class'      => 'clearfix',
+							'fallback_cb'     => 'galaxy_store_nav_menu_fallback',
+							'theme_location'  => 'primary',
+						)
+					);
+					?>
+
+
 				</div>
 			</div>
 		</div>

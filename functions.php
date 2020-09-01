@@ -50,7 +50,8 @@ if ( ! function_exists( 'galaxy_store_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'galaxy-store' ),
+				'top-bar' => esc_html__( 'Top Bar', 'galaxy-store' ),
+				'primary' => esc_html__( 'Primary', 'galaxy-store' ),
 			)
 		);
 
@@ -116,6 +117,31 @@ function galaxy_store_content_width() {
 }
 add_action( 'after_setup_theme', 'galaxy_store_content_width', 0 );
 
+
+
+if ( ! function_exists( 'galaxy_store_nav_menu_fallback' ) ) {
+	/**
+	 * Fallback for wp_nav_menu
+	 *
+	 * @since 1.0.0
+	 */
+	function galaxy_store_nav_menu_fallback() {
+		?>
+		<ul class="menu">
+			<?php
+			if ( current_user_can( 'edit_theme_options' ) ) {
+				?>
+				<li class="menu-item"><a href="<?php echo esc_url( admin_url( 'nav-menus.php' ) ); ?>"><?php esc_html_e( 'Add Menu', 'trending-mag' ); ?></a></li>
+				<?php
+			}
+			?>
+		</ul>
+		<?php
+	}
+}
+
+
+
 /**
  * Register widget area.
  *
@@ -134,6 +160,9 @@ function galaxy_store_widgets_init() {
 		)
 	);
 
+	/**
+	 * Frontpage section widgets.
+	 */
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Frontpage Widgets', 'galaxy-store' ),
@@ -145,8 +174,87 @@ function galaxy_store_widgets_init() {
 			'after_title'   => '</span>',
 		)
 	);
+
+	/**
+	 * Footer widget areas.
+	 */
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Footer Widget Area One', 'galaxy-store' ),
+			'id'            => 'footer-widgets-area-one',
+			'description'   => esc_html__( 'Add widgets for your footer.', 'galaxy-store' ),
+			'before_widget' => '<div id="%1$s" class="footer-widgets %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<span>',
+			'after_title'   => '</span>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Footer Widget Area Two', 'galaxy-store' ),
+			'id'            => 'footer-widgets-area-two',
+			'description'   => esc_html__( 'Add widgets for your footer.', 'galaxy-store' ),
+			'before_widget' => '<div id="%1$s" class="footer-widgets %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<span>',
+			'after_title'   => '</span>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Footer Widget Area Three', 'galaxy-store' ),
+			'id'            => 'footer-widgets-area-three',
+			'description'   => esc_html__( 'Add widgets for your footer.', 'galaxy-store' ),
+			'before_widget' => '<div id="%1$s" class="footer-widgets %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<span>',
+			'after_title'   => '</span>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Footer Widget Area Four', 'galaxy-store' ),
+			'id'            => 'footer-widgets-area-four',
+			'description'   => esc_html__( 'Add widgets for your footer.', 'galaxy-store' ),
+			'before_widget' => '<div id="%1$s" class="footer-widgets %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<span>',
+			'after_title'   => '</span>',
+		)
+	);
 }
 add_action( 'widgets_init', 'galaxy_store_widgets_init' );
+
+
+/**
+ * Returns the array of active footer widget areas
+ */
+function galaxy_store_get_active_footer_widget_areas() {
+
+	$active_area = array();
+
+	$widget_area_ids = array(
+		'footer-widgets-area-one',
+		'footer-widgets-area-two',
+		'footer-widgets-area-three',
+		'footer-widgets-area-four',
+	);
+
+	if ( is_array( $widget_area_ids ) && ! empty( $widget_area_ids ) ) {
+		foreach ( $widget_area_ids as $widget_area_id ) {
+			if ( is_active_sidebar( $widget_area_id ) ) {
+				$active_area[] = $widget_area_id;
+			}
+		}
+	}
+
+	return $active_area;
+
+}
+
 
 /**
  * Enqueue scripts and styles.
@@ -168,7 +276,6 @@ function galaxy_store_scripts() {
 
 	wp_enqueue_style( 'galaxy-store-style', get_stylesheet_uri(), array(), GALAXY_STORE_VERSION );
 	wp_style_add_data( 'galaxy-store-style', 'rtl', 'replace' );
-
 
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'galaxy-store-nice-select', get_template_directory_uri() . '/js/jquery.nice-select.min.js', array(), '1.0.0', true );
