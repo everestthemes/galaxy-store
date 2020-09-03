@@ -308,6 +308,11 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 
 /**
+ * Customizer control class.
+ */
+require get_template_directory() . '/inc/classes/class-galaxy-store-register-options.php';
+
+/**
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
