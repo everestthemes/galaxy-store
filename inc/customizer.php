@@ -5,6 +5,27 @@
  * @package galaxy-store
  */
 
+/**
+ * Exit if accessed directly.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Returns the theme mod.
+ */
+function galaxy_store_get_theme_mod( $key = false, $default = false ) {
+	$mods = get_theme_mod( 'galaxy_store_customizer' );
+
+	if ( ! $key ) {
+		return $mods;
+	}
+
+	return isset( $mods[ $key ] ) ? $mods[ $key ] : $default;
+}
+
+
 
 /**
  * Add postMessage support for site title and description for the Theme Customizer.

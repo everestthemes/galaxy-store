@@ -36,6 +36,7 @@ Galaxy_Store_Register_Options::register_option(
 		'name'              => 'galaxy_store_customizer[site_layout]',
 		'sanitize_callback' => 'galaxy_store_sanitize_select',
 		'label'             => esc_html__( 'Site Layout', 'galaxy-store' ),
+		'default'           => 'boxed',
 		'choices'           => array(
 			'full-width' => __( 'Full width layout', 'galaxy-store' ),
 			'boxed'      => __( 'Boxed layout', 'galaxy-store' ),

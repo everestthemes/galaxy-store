@@ -18,8 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-$widget_area_ids = galaxy_store_get_active_footer_widget_areas();
-
+$widget_area_ids       = galaxy_store_get_active_footer_widget_areas();
+$display_social_icons  = galaxy_store_get_theme_mod( 'display_social_icons', true );
+$social_links          = galaxy_store_get_theme_mod( 'right_section_social_link' );
+$footer_copyright_text = galaxy_store_get_theme_mod( 'footer_copyright_text' );
+$payment_option_logos  = galaxy_store_get_theme_mod( 'payment_option_logos' );
 ?>
 
 <footer class="footer-area">
@@ -50,77 +53,64 @@ $widget_area_ids = galaxy_store_get_active_footer_widget_areas();
 		<div class="container">
 			<div class="footer-b-wrap">
 				<div class="row">
-					<div class="col-xl-4 col-lg-4 col-md-12 text-center text-lg-left">
-						<div class="footer-social">
-							<ul>
-								<li>
-									<a href="">
-										<img src="images/fb.jpg" alt="image">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="images/tw.jpg" alt="image">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="images/google.jpg" alt="image">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="images/youtube.jpg" alt="image">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="images/insta.jpg" alt="image">
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
 
-					<div class="col-xl-4 col-lg-4 col-md-12 text-center">
-						<div class="footer-copy">
-							<p>
-								&copy; 2020 All Right Reserved By ABC
-							</p>
-						</div>
-					</div>
 
-					<div class="col-xl-4 col-lg-4 col-md-12 text-lg-right text-center">
-						<div class="footer-payment">
-							<ul>
-								<li>
-									<a href="">
-										<img src="images/pay-1.jpg" alt="image">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="images/pay-2.jpg" alt="image">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="images/pay-3.jpg" alt="image">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="images/pay-4.jpg" alt="image">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="images/pay-5.jpg" alt="image">
-									</a>
-								</li>
-							</ul>
+					<?php
+					if ( $display_social_icons && is_array( $social_links ) && ! empty( $social_links ) ) {
+						?>
+						<div class="col-xl-4 col-lg-4 col-md-12 text-center text-lg-left">
+							<div class="footer-social">
+
+								<ul>
+									<?php
+									foreach ( $social_links as $social_link_type => $social_link_address ) {
+										if ( ! $social_link_address ) {
+											continue;
+										}
+										?>
+										<li>
+											<a href="<?php echo esc_url( $social_link_address ); ?>">
+												<i class="bfy-icon bfy-<?php echo esc_attr( $social_link_type ); ?>"></i>
+											</a>
+										</li>
+										<?php
+									}
+									?>
+								</ul>
+
+							</div>
 						</div>
-					</div>
+						<?php
+					}
+					?>
+
+
+					<?php if ( $footer_copyright_text ) { ?>
+						<div class="col-xl-4 col-lg-4 col-md-12 text-center">
+							<div class="footer-copy">
+								<p><?php echo wp_kses_post( $footer_copyright_text ); ?></p>
+							</div>
+						</div>
+					<?php } ?>
+
+
+					<?php if ( $payment_option_logos && is_array( $payment_option_logos ) ) { ?>
+						<div class="col-xl-4 col-lg-4 col-md-12 text-lg-right text-center">
+							<div class="footer-payment">
+								<ul>
+									<?php foreach ( $payment_option_logos as $payment_option_logo ) { ?>
+										<li>
+											<a>
+												<img src="<?php echo esc_url( $payment_option_logo ); ?>">
+											</a>
+										</li>
+									<?php } ?>
+								</ul>
+							</div>
+						</div>
+					<?php } ?>
+
+
 				</div>
 			</div>
 		</div>

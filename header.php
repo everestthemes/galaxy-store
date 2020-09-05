@@ -9,6 +9,16 @@
  * @package Galaxy_Store
  */
 
+
+$misc_options_enable_search_form = galaxy_store_get_theme_mod( 'misc_options_enable_search_form', true );
+$misc_options_enable_wishlist    = galaxy_store_get_theme_mod( 'misc_options_enable_wishlist', true );
+$misc_options_enable_mini_cart   = galaxy_store_get_theme_mod( 'misc_options_enable_mini_cart', true );
+
+$special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title' );
+
+$galaxy_store_site_layout = galaxy_store_get_theme_mod( 'site_layout', 'boxed' );
+
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -20,84 +30,18 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( $galaxy_store_site_layout ); ?>>
 <?php wp_body_open(); ?>
 
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'galaxy-store' ); ?></a>
 
 	<header class="header">
-		<div class="top-header">
-			<div class="container">
-				<div class="d-flex align-items-center">
-					<div class="topbar-left">
 
-						<?php
-						wp_nav_menu(
-							array(
-								'container'       => 'div',
-								'container_class' => 'top-nav',
-								'fallback_cb'     => 'galaxy_store_nav_menu_fallback',
-								'theme_location'  => 'top-bar',
-							)
-						);
-						?>
-
-					</div>
-
-					<div class="topbar-right ml-auto">
-						<div class="list-inline-item top-social">
-							<ul>
-								<li>
-									<a href="#">
-										<i class="bfy-icon bfy-facebook"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="bfy-icon bfy-instagram"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="bfy-icon bfy-twitter"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
-						<ul class="list-inline-item top-Culogin">
-							<li class="list-inline-item mr-0">
-								<div class="currency borderLeft">
-									<a href="#">Dollar (US) <i class="icon-arrow-down"></i></a>
-									<ul class="dropLang">
-										<li>
-											<a href="">English</a>
-										</li>
-										<li>
-											<a href="">Deutch</a>
-										</li>
-										<li>
-											<a href="">Espanol</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="list-inline-item">
-								<div class="top-header-login borderLeft d-xl-block d-none">
-									<a href="#">
-										<i class="icon-user"></i> Register <span>or</span> Sign in
-									</a>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
+		<?php get_template_part( 'template-parts/content', 'top-header' ); ?>
 
 		<div class="main-header">
 			<div class="container">
 				<div class="firstrow clearfix">
-
 
 					<?php if ( has_custom_logo() || get_bloginfo() || get_bloginfo( 'description' ) ) { ?>
 						<div class="logo">
@@ -112,7 +56,7 @@
 											</h1>
 										<?php } ?>
 										<?php if ( get_bloginfo( 'description' ) ) { ?>
-											<p class="site-tagline">
+											<p class="site-description">
 												<?php echo esc_html( get_bloginfo( 'description' ) ); ?>
 											</p>
 										<?php } ?>
@@ -124,106 +68,83 @@
 
 
 					<div class="header-cart">
-						<div class="d-xl-none">
-							<a href="">
-								<i class="icon-user"></i>
-							</a>
-						</div>
-						<div>
-							<a href="">
-								<i class="icon-heart"></i>
-							</a>
-						</div>
-						<div>
-							<a href="">
-								<i class="icon-bag"></i>
-							</a>
-						</div>
+
+						<?php if ( ! is_user_logged_in() ) { ?>
+							<div class="d-xl-none">
+								<a href="<?php echo esc_url( wp_login_url() ); ?>">
+									<i class="icon-user"></i>
+								</a>
+							</div>
+						<?php } ?>
+
+						<?php if ( $misc_options_enable_wishlist ) { ?>
+							<div>
+								<a href="">
+									<i class="icon-heart"></i>
+								</a>
+							</div>
+						<?php } ?>
+
+						<?php if ( $misc_options_enable_mini_cart ) { ?>
+							<div>
+								<a href="">
+									<i class="icon-bag"></i>
+								</a>
+							</div>
+						<?php } ?>
+
 						<div class="togMenu">
 							<i class="icon-options-vertical"></i>
 						</div>
+
 					</div>
+
 					<div class="first-search-input-wrap clearfix">
 						<div class="category-toggle-button">
 							<i class="icon-menu"></i>
 						</div>
-						<form class="form-field">
-							<div class="searchelememts">
-								<input type="text" name="" placeholder="Search for product">
-								<select class="cat-search">
-									<option value="volvo">All category</option>
-									<option value="volvo">Category 1</option>
-									<option value="saab">Category 2</option>
-									<option value="mercedes">Category 3</option>
-									<option value="audi">Category 4</option>
-								</select>
-							</div>
-							<div class="searchicon">
-								<i class="icon-magnifier"></i>
-							</div>
-						</form>
+
+						<?php if ( $misc_options_enable_search_form ) { ?>
+							<form class="form-field">
+								<div class="searchelememts">
+									<input type="text" name="" placeholder="Search for product">
+									<select class="cat-search">
+										<option value="volvo">All category</option>
+										<option value="volvo">Category 1</option>
+										<option value="saab">Category 2</option>
+										<option value="mercedes">Category 3</option>
+										<option value="audi">Category 4</option>
+									</select>
+								</div>
+								<div class="searchicon">
+									<i class="icon-magnifier"></i>
+								</div>
+							</form>
+						<?php } ?>
 					</div>
+
 				</div>
 
 				<div class="secondrow clearfix">
 
-
 					<div class="category-section">
-						<div class="category-header">
-							All Departments
-						</div>
-						<ul class="category-nav">
-							<li>
-								<a href="#">
-									Brands
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									Fashion
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									New Arrival
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									TV & Audio
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									Accessories
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									Brands
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									Fashion
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									New Arrival
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									TV & Audio
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									Accessories
-								</a>
-							</li>
-						</ul>
+
+						<?php if ( $special_menu_title ) { ?>
+							<div class="category-header">
+								<?php echo esc_html( $special_menu_title ); ?>
+							</div>
+						<?php } ?>
+
+						<?php
+						wp_nav_menu(
+							array(
+								'menu_class'     => 'category-nav',
+								'fallback_cb'    => 'galaxy_store_nav_menu_fallback',
+								'theme_location' => 'special-menu',
+							)
+						);
+						?>
+
 					</div>
 
 

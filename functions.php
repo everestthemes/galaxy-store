@@ -50,8 +50,9 @@ if ( ! function_exists( 'galaxy_store_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'top-bar' => esc_html__( 'Top Bar', 'galaxy-store' ),
-				'primary' => esc_html__( 'Primary', 'galaxy-store' ),
+				'top-bar'      => esc_html__( 'Top Bar', 'galaxy-store' ),
+				'primary'      => esc_html__( 'Primary', 'galaxy-store' ),
+				'special-menu' => esc_html__( 'Special Menu', 'galaxy-store' ),
 			)
 		);
 
@@ -252,6 +253,12 @@ function galaxy_store_get_active_footer_widget_areas() {
 
 	$active_area = array();
 
+	$enable_widget_area = galaxy_store_get_theme_mod( 'enable_footer_widgets', true );
+
+	if ( ! $enable_widget_area ) {
+		return;
+	}
+
 	$widget_area_ids = array(
 		'footer-widgets-area-one',
 		'footer-widgets-area-two',
@@ -273,9 +280,43 @@ function galaxy_store_get_active_footer_widget_areas() {
 
 
 /**
+ * Dynamic CSS variables.
+ */
+function galaxy_store_dynamic_css_variables() {
+
+	$colors = array(
+		'top_header_bg_color'             => '#f7f8fb',
+		'top_header_text_color'           => '#7d7d7d',
+		'top_header_link_hover_color'     => '#F77426',
+		'top_header_menu_separator_color' => '#e0e0e0',
+		'top_header_border_bottom_color'  => '#e0e0e0',
+	);
+
+	?>
+	<style id="galaxy-store-dynamic-css-variables">
+		:root {
+			<?php
+			if ( is_array( $colors ) && ! empty( $colors ) ) {
+				foreach ( $colors as $color_index => $color_default ) {
+					$css_var_suffix = str_replace( '_', '-', $color_index );
+					$color_values   = sanitize_hex_color( galaxy_store_get_theme_mod( $color_index, $color_default ) );
+					echo esc_attr( "--galaxy-store-{$css_var_suffix}: {$color_values}; " );
+				}
+			}
+			?>
+		}
+	</style>
+	<?php
+}
+
+
+
+/**
  * Enqueue scripts and styles.
  */
 function galaxy_store_scripts() {
+
+	galaxy_store_dynamic_css_variables();
 
 	wp_enqueue_style( 'galaxy-store-bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '4.0.0' );
 	wp_enqueue_style( 'galaxy-store-simple-line-icons', get_template_directory_uri() . '/css/simple-line-icons.css', array(), '1.0.0' );
