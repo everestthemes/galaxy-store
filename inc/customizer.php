@@ -16,6 +16,7 @@ function galaxy_store_customize_register( $wp_customize ) {
 	$customizer_path = get_template_directory() . '/inc/customizer';
 
 	require_once "{$customizer_path}/custom-controls/class-galaxy-store-customizer-label.php";
+	require_once "{$customizer_path}/custom-controls/toggle/class-toggle-control.php";
 
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
@@ -41,6 +42,7 @@ function galaxy_store_customize_register( $wp_customize ) {
 	$customizer_options = array(
 		'site-layout',
 		'header',
+		'footer',
 	);
 
 	if ( is_array( $customizer_options ) && ! empty( $customizer_options ) ) {

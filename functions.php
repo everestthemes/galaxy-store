@@ -230,6 +230,22 @@ add_action( 'widgets_init', 'galaxy_store_widgets_init' );
 
 
 /**
+ * Returns the array of supported social links.
+ */
+function galaxy_store_social_links() {
+	return apply_filters(
+		'galaxy_store_social_links',
+		array(
+			'facebook',
+			'instagram',
+			'twitter',
+		)
+	);
+}
+
+
+
+/**
  * Returns the array of active footer widget areas
  */
 function galaxy_store_get_active_footer_widget_areas() {
