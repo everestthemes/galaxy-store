@@ -44,6 +44,39 @@ if ( ! class_exists( 'Galaxy_Store_Product_Categories_Widget' ) ) {
 		}
 
 		/**
+		 * Prints the html of WooCommerce product categories checkboxes.
+		 */
+		private function get_product_categories() {
+			$product_categories = get_terms(
+				array(
+					'taxonomy' => 'product_cat',
+				)
+			);
+
+			ob_start();
+			if ( $product_categories && ! is_wp_error( $product_categories ) ) {
+				if ( is_array( $product_categories ) && ! empty( $product_categories ) ) {
+					foreach ( $product_categories as $product_category ) {
+						?>
+						<label>
+							<input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'product_categories' ) ); ?>[]" value="<?php echo esc_attr( $product_category->term_id ); ?>">
+							<span><?php echo esc_html( $product_category->name ); ?></span>
+						</label>
+						<?php
+					}
+				}
+			} else {
+				?>
+				<p class="description"><?php esc_html_e( 'No product categories found.' ); ?></p>
+				<?php
+			}
+			$content = ob_get_clean();
+
+			echo $content; // phpcs:ignore
+
+		}
+
+		/**
 		 * Back-end widget form.
 		 *
 		 * @see WP_Widget::form()
@@ -58,6 +91,13 @@ if ( ! class_exists( 'Galaxy_Store_Product_Categories_Widget' ) ) {
 					<?php esc_attr_e( 'Title:', 'galaxy-store' ); ?>
 				</label>
 				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+			</p>
+			<p>
+				<label><?php esc_html_e( 'Product Categories:', 'galaxy-store' ); ?></label>
+
+				<div class="product-categories-container">
+					<?php $this->get_product_categories(); ?>
+				</div>
 			</p>
 			<?php
 		}
