@@ -86,11 +86,12 @@ Galaxy_Store_Register_Options::register_option(
 
 
 for ( $index = 1; $index <= 5; $index++ ) {
+	$index_key = $index - 1;
 	Galaxy_Store_Register_Options::register_option(
 		$wp_customize,
 		array(
 			'custom_control'    => 'WP_Customize_Image_Control',
-			'name'              => "galaxy_store_customizer[payment_option_logos][{$index}]",
+			'name'              => "galaxy_store_customizer[payment_option_logos][{$index_key}]",
 			'sanitize_callback' => 'esc_url_raw',
 			'label'             => esc_html__( 'Payment Option', 'galaxy-store' ) . " {$index}",
 			'section'           => 'galaxy_store_customizer_footer',

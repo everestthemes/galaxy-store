@@ -45,8 +45,11 @@ if ( ! class_exists( 'Galaxy_Store_Product_Categories_Widget' ) ) {
 
 		/**
 		 * Prints the html of WooCommerce product categories checkboxes.
+		 *
+		 * @param array $instance Previously saved values from database.
 		 */
-		private function get_product_categories() {
+		private function get_product_categories( $instance ) {
+
 			$product_categories = get_terms(
 				array(
 					'taxonomy' => 'product_cat',
@@ -57,9 +60,17 @@ if ( ! class_exists( 'Galaxy_Store_Product_Categories_Widget' ) ) {
 			if ( $product_categories && ! is_wp_error( $product_categories ) ) {
 				if ( is_array( $product_categories ) && ! empty( $product_categories ) ) {
 					foreach ( $product_categories as $product_category ) {
+						$product_category_slug = $product_category->slug;
+
+						$checked = '';
+						if ( ! empty( $instance['product_categories'] ) ) {
+							if ( in_array( $product_category_slug, $instance['product_categories'], true ) ) {
+								$checked = 'checked';
+							}
+						}
 						?>
 						<label>
-							<input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'product_categories' ) ); ?>[]" value="<?php echo esc_attr( $product_category->term_id ); ?>">
+							<input type="checkbox" <?php echo esc_attr( $checked ); ?> name="<?php echo esc_attr( $this->get_field_name( 'product_categories' ) ); ?>[]" value="<?php echo esc_attr( $product_category_slug ); ?>">
 							<span><?php echo esc_html( $product_category->name ); ?></span>
 						</label>
 						<?php
@@ -67,7 +78,9 @@ if ( ! class_exists( 'Galaxy_Store_Product_Categories_Widget' ) ) {
 				}
 			} else {
 				?>
-				<p class="description"><?php esc_html_e( 'No product categories found.' ); ?></p>
+				<p class="description">
+					<?php esc_html_e( 'No product categories found.' ); ?>
+				</p>
 				<?php
 			}
 			$content = ob_get_clean();
@@ -88,15 +101,17 @@ if ( ! class_exists( 'Galaxy_Store_Product_Categories_Widget' ) ) {
 			?>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-					<?php esc_attr_e( 'Title:', 'galaxy-store' ); ?>
+					<strong><?php esc_html_e( 'Title:', 'galaxy-store' ); ?></strong>
 				</label>
 				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 			</p>
 			<p>
-				<label><?php esc_html_e( 'Product Categories:', 'galaxy-store' ); ?></label>
+				<label>
+					<strong><?php esc_html_e( 'Product Categories:', 'galaxy-store' ); ?></strong>
+				</label>
 
-				<div class="product-categories-container">
-					<?php $this->get_product_categories(); ?>
+				<div class="product-categories">
+					<?php $this->get_product_categories( $instance ); ?>
 				</div>
 			</p>
 			<?php
@@ -113,8 +128,9 @@ if ( ! class_exists( 'Galaxy_Store_Product_Categories_Widget' ) ) {
 		 * @return array Updated safe values to be saved.
 		 */
 		public function update( $new_instance, $old_instance ) {
-			$instance          = array();
-			$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? sanitize_text_field( $new_instance['title'] ) : '';
+			$instance                       = array();
+			$instance['title']              = ( ! empty( $new_instance['title'] ) ) ? galaxy_store_sanitize( $new_instance['title'] ) : '';
+			$instance['product_categories'] = ( ! empty( $new_instance['product_categories'] ) ) ? galaxy_store_sanitize( $new_instance['product_categories'] ) : array();
 			return $instance;
 		}
 
@@ -131,5 +147,5 @@ if ( ! function_exists( 'galaxy_store_product_categories_widget' ) ) {
 	function galaxy_store_product_categories_widget() {
 		register_widget( 'Galaxy_Store_Product_Categories_Widget' );
 	}
-	add_action( 'widgets_init', 'galaxy_store_product_categories_widget' );
+	add_action( 'widgets_init', 'galaxy_store_product_categories_widget', 20 );
 }

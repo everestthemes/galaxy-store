@@ -280,6 +280,30 @@ function galaxy_store_get_active_footer_widget_areas() {
 
 
 /**
+ * Recursive sanitation for an array/
+ *
+ * Here we are using sanitize_text_field function wrapped with our custom function.
+ * This custom function iterates the sanitize_text_field function to every string element of provided array
+ * and returns the array with sanitized string elements.
+ *
+ * Credit: @link https://wordpress.stackexchange.com/a/255238
+ *
+ * @param array $array submitted $_POST data array.
+ * @return mixed
+ */
+function galaxy_store_sanitize( $array ) {
+	foreach ( $array as $key => &$value ) {
+		if ( is_array( $value ) ) {
+			$value = galaxy_store_sanitize( $value );
+		} else {
+			$value = sanitize_text_field( wp_unslash( $value ) );
+		}
+	}
+	return $array;
+}
+
+
+/**
  * Dynamic CSS variables.
  */
 function galaxy_store_dynamic_css_variables() {
@@ -348,6 +372,21 @@ function galaxy_store_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'galaxy_store_scripts' );
+
+
+if ( ! function_exists( 'galaxy_store_admin_scripts' ) ) {
+
+	/**
+	 * Hooks the styles and scripts to admin panel.
+	 */
+	function galaxy_store_admin_scripts() {
+		wp_enqueue_media();
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'galaxy-store-admin', get_template_directory_uri() . '/js/admin.js', array(), GALAXY_STORE_VERSION, true );
+	}
+	add_action( 'admin_enqueue_scripts', 'galaxy_store_admin_scripts' );
+}
+
 
 /**
  * Implement the Custom Header feature.

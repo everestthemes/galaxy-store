@@ -51,13 +51,36 @@ if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
 		 * @param array $instance Previously saved values from database.
 		 */
 		public function form( $instance ) {
-			$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
+
+			$bg_image_id = $this->get_field_id( 'background-image' );
+			$image_uri   = ! empty( $instance['image_uri'] ) ? $instance['image_uri'] : '';
 			?>
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-					<?php esc_attr_e( 'Title:', 'galaxy-store' ); ?>
+				<label for="<?php echo esc_attr( $bg_image_id ); ?>">
+					<strong><?php esc_html_e( 'Background Image:', 'galaxy-store' ); ?></strong>
 				</label>
-				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+				<img class="<?php echo esc_attr( "{$bg_image_id}_img" ); ?>" src="<?php echo esc_url( $image_uri ); ?>" style="margin:0;padding:0;max-width:100%;display:block"/>
+				<input type="hidden" class="widefat <?php echo esc_attr( "{$bg_image_id}_url" ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'image_uri' ) ); ?>" value="<?php echo esc_url( $image_uri ); ?>"/>
+				<input data-save="<?php echo esc_attr( $this->get_field_id( 'savewidget' ) ); ?>" type="button" id="<?php echo esc_attr( $bg_image_id ); ?>" class="button button-primary js_custom_upload_media" value="<?php esc_attr_e( 'Upload Image', 'galaxy-store' ); ?>" style="margin-top:5px;" />
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'product_category' ) ); ?>">
+					<strong><?php esc_html_e( 'Select Category:', 'galaxy-store' ); ?></strong>
+				</label>
+				<?php
+					wp_dropdown_categories(
+						array(
+							'taxonomy'        => 'product_cat',
+							'show_option_all' => esc_html__( 'Select Category', 'orchid-store' ),
+							'name'            => $this->get_field_name( 'product_category' ),
+							'id'              => $this->get_field_id( 'product_category' ),
+							'class'           => 'widefat',
+							'value_field'     => 'slug',
+							'hide_empty'      => 1,
+							'selected'        => isset( $instance['product_category'] ) ? $instance['product_category'] : '',
+						)
+					);
+				?>
 			</p>
 			<?php
 		}
@@ -73,8 +96,10 @@ if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
 		 * @return array Updated safe values to be saved.
 		 */
 		public function update( $new_instance, $old_instance ) {
-			$instance          = array();
-			$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? sanitize_text_field( $new_instance['title'] ) : '';
+			$instance = array();
+
+			$instance['image_uri']        = ( ! empty( $new_instance['image_uri'] ) ) ? esc_url_raw( $new_instance['image_uri'] ) : '';
+			$instance['product_category'] = ( ! empty( $new_instance['product_category'] ) ) ? sanitize_text_field( $new_instance['product_category'] ) : '';
 			return $instance;
 		}
 
