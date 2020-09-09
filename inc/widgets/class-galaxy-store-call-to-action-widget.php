@@ -43,6 +43,124 @@ if ( ! class_exists( 'Galaxy_Store_Call_To_Action_Widget' ) ) {
 			get_template_part( 'template-parts/frontpage/call-to-action' );
 		}
 
+
+		/**
+		 * Call to action layout one.
+		 */
+		private function layout_type_one( $instance ) {
+			$title        = ! empty( $instance['layout_one']['title'] ) ? $instance['layout_one']['title'] : '';
+			$description  = ! empty( $instance['layout_one']['description'] ) ? $instance['layout_one']['description'] : '';
+			$button_label = ! empty( $instance['layout_one']['button_label'] ) ? $instance['layout_one']['button_label'] : __( 'Shop Now', 'galaxy-store' );
+			$button_link  = ! empty( $instance['layout_one']['button_link'] ) ? $instance['layout_one']['button_link'] : null;
+
+			$bg_image_id = $this->get_field_id( 'background-image' );
+			$image_uri   = ! empty( $instance['layout_one']['image_uri'] ) ? $instance['layout_one']['image_uri'] : '';
+
+			$field_name = $this->get_field_name( 'layout_one' );
+			ob_start();
+			?>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
+					<strong><?php esc_html_e( 'Title:', 'galaxy-store' ); ?></strong>
+				</label>
+				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( "{$field_name}[title]" ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'description' ) ); ?>">
+					<strong><?php esc_html_e( 'Description:', 'galaxy-store' ); ?></strong>
+				</label>
+				<textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'description' ) ); ?>" name="<?php echo esc_attr( "{$field_name}[description]" ); ?>" ><?php echo esc_html( $description ); ?></textarea>
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'button_label' ) ); ?>">
+					<strong><?php esc_html_e( 'Button Label:', 'galaxy-store' ); ?></strong>
+				</label>
+				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'button_label' ) ); ?>" name="<?php echo esc_attr( "{$field_name}[button_label]" ); ?>" type="text" value="<?php echo esc_attr( $button_label ); ?>">
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'button_link' ) ); ?>">
+					<strong><?php esc_html_e( 'Button Link:', 'galaxy-store' ); ?></strong>
+				</label>
+				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'button_link' ) ); ?>" name="<?php echo esc_attr( "{$field_name}[button_link]" ); ?>" type="text" value="<?php echo esc_url( $button_link ); ?>">
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $bg_image_id ); ?>">
+					<strong><?php esc_html_e( 'Background Image:', 'galaxy-store' ); ?></strong>
+				</label>
+				<img class="<?php echo esc_attr( "{$bg_image_id}_img" ); ?>" src="<?php echo esc_url( $image_uri ); ?>" style="margin:0;padding:0;max-width:100%;display:block"/>
+				<input type="hidden" class="widefat <?php echo esc_attr( "{$bg_image_id}_url" ); ?>" name="<?php echo esc_attr( "{$field_name}[image_uri]" ); ?>" value="<?php echo esc_url( $image_uri ); ?>"/>
+				<input data-save="<?php echo esc_attr( $this->get_field_id( 'savewidget' ) ); ?>" type="button" id="<?php echo esc_attr( $bg_image_id ); ?>" class="button button-primary js_custom_upload_media" value="<?php esc_attr_e( 'Upload Image', 'galaxy-store' ); ?>" style="margin-top:5px;" />
+			</p>
+			<?php
+			$content = ob_get_clean();
+
+			echo $content; // phpcs:ignore
+		}
+
+
+		/**
+		 * Call to action layout two.
+		 */
+		private function layout_type_two( $instance ) {
+			ob_start();
+
+			for ( $index = 0; $index <= 2; $index++ ) {
+				$title        = ! empty( $instance['layout_two'][ $index ]['title'] ) ? $instance['layout_two'][ $index ]['title'] : '';
+				$sub_title    = ! empty( $instance['layout_two'][ $index ]['sub_title'] ) ? $instance['layout_two'][ $index ]['sub_title'] : '';
+				$button_label = ! empty( $instance['layout_two'][ $index ]['button_label'] ) ? $instance['layout_two'][ $index ]['button_label'] : __( 'Shop Now', 'galaxy-store' );
+				$button_link  = ! empty( $instance['layout_two'][ $index ]['button_link'] ) ? $instance['layout_two'][ $index ]['button_link'] : '';
+				$image_uri    = ! empty( $instance['layout_two'][ $index ]['image_uri'] ) ? $instance['layout_two'][ $index ]['image_uri'] : '';
+
+				$field_id    = $this->get_field_id( 'layout-two' ) . "-{$index}";
+				$field_name  = $this->get_field_name( 'layout_two' ) . "[{$index}]";
+				$bg_image_id = "{$field_id}-background-image";
+
+				$current = $index + 1;
+				?>
+				<div class="cta-layout-two-sections cta-<?php echo esc_attr( $index ); ?>">
+					<hr>
+					<h2><?php echo esc_html( __( 'Call To Action', 'galaxy-store' ) . ' ' . $current ); ?></h2>
+					<p>
+						<label for="<?php echo esc_attr( "{$field_id}-title" ); ?>">
+							<strong><?php esc_html_e( 'Title:', 'galaxy-store' ); ?></strong>
+						</label>
+						<input class="widefat" id="<?php echo esc_attr( "{$field_id}-title" ); ?>" name="<?php echo esc_attr( "{$field_name}[title]" ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+					</p>
+					<p>
+						<label for="<?php echo esc_attr( "{$field_id}-sub-title" ); ?>">
+							<strong><?php esc_html_e( 'Sub Title:', 'galaxy-store' ); ?></strong>
+						</label>
+						<input class="widefat" id="<?php echo esc_attr( "{$field_id}-sub-title" ); ?>" name="<?php echo esc_attr( "{$field_name}[sub_title]" ); ?>" type="text" value="<?php echo esc_attr( $sub_title ); ?>">
+					</p>
+					<p>
+						<label for="<?php echo esc_attr( "{$field_id}-button-label" ); ?>">
+							<strong><?php esc_html_e( 'Button Label:', 'galaxy-store' ); ?></strong>
+						</label>
+						<input class="widefat" id="<?php echo esc_attr( "{$field_id}-button-label" ); ?>" name="<?php echo esc_attr( "{$field_name}[button_label]" ); ?>" type="text" value="<?php echo esc_attr( $button_label ); ?>">
+					</p>
+					<p>
+						<label for="<?php echo esc_attr( "{$field_id}-button-link" ); ?>">
+							<strong><?php esc_html_e( 'Button Link:', 'galaxy-store' ); ?></strong>
+						</label>
+						<input class="widefat" id="<?php echo esc_attr( "{$field_id}-button-link" ); ?>" name="<?php echo esc_attr( "{$field_name}[button_link]" ); ?>" type="text" value="<?php echo esc_url( $button_link ); ?>">
+					</p>
+					<p>
+						<label for="<?php echo esc_attr( $bg_image_id ); ?>">
+							<strong><?php esc_html_e( 'Background Image:', 'galaxy-store' ); ?></strong>
+						</label>
+						<img class="<?php echo esc_attr( "{$bg_image_id}_img" ); ?>" src="<?php echo esc_url( $image_uri ); ?>" style="margin:0;padding:0;max-width:100%;display:block"/>
+						<input type="hidden" class="widefat <?php echo esc_attr( "{$bg_image_id}_url" ); ?>" name="<?php echo esc_attr( "{$field_name}[image_uri]" ); ?>" value="<?php echo esc_url( $image_uri ); ?>"/>
+						<input data-save="<?php echo esc_attr( $this->get_field_id( 'savewidget' ) ); ?>" type="button" id="<?php echo esc_attr( $bg_image_id ); ?>" class="button button-primary js_custom_upload_media" value="<?php esc_attr_e( 'Upload Image', 'galaxy-store' ); ?>" style="margin-top:5px;" />
+					</p>
+				</div>
+				<?php
+			}
+			$content = ob_get_clean();
+
+			echo $content; // phpcs:ignore
+		}
+
+
 		/**
 		 * Back-end widget form.
 		 *
@@ -51,14 +169,38 @@ if ( ! class_exists( 'Galaxy_Store_Call_To_Action_Widget' ) ) {
 		 * @param array $instance Previously saved values from database.
 		 */
 		public function form( $instance ) {
-			$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
+			$layout_type = ! empty( $instance['layout_type'] ) ? $instance['layout_type'] : 'layout_one';
 			?>
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-					<?php esc_attr_e( 'Title:', 'galaxy-store' ); ?>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'layout-type' ) ); ?>">
+					<strong><?php esc_html_e( 'Select Layout:', 'galaxy-store' ); ?></strong>
 				</label>
-				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+				<select name="<?php echo esc_attr( $this->get_field_name( 'layout_type' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'layout-type' ) ); ?>">
+					<option <?php selected( $layout_type, 'layout_one' ); ?> value="layout_one"><?php esc_html_e( 'Layout One', 'galaxy-store' ); ?></option>
+					<option <?php selected( $layout_type, 'layout_two' ); ?> value="layout_two"><?php esc_html_e( 'Layout Two', 'galaxy-store' ); ?></option>
+				</select>
 			</p>
+			<div id="<?php echo esc_attr( $this->get_field_id( 'layout-type-fields' ) ); ?>"></div>
+
+			<script type="text/javascript">
+				jQuery(function($){
+					var layoutHtml = '';
+					var layoutTypeFields   = document.getElementById('<?php echo esc_attr( $this->get_field_id( 'layout-type-fields' ) ); ?>');
+					var layoutTypeSelector = '#<?php echo esc_attr( $this->get_field_id( 'layout-type' ) ); ?>';
+
+					$(document).on('change', layoutTypeSelector, function(){
+						var selectedLayout = $(this).find(':selected').val();
+
+						if ( 'layout_one' == selectedLayout ) {
+							layoutHtml = `<?php $this->layout_type_one( $instance ); ?>`;
+						} else {
+							layoutHtml = `<?php $this->layout_type_two( $instance ); ?>`;
+						}
+						$(layoutTypeFields).html(layoutHtml);
+					});
+					$(layoutTypeSelector).trigger('change');
+				});
+			</script>
 			<?php
 		}
 
@@ -73,8 +215,11 @@ if ( ! class_exists( 'Galaxy_Store_Call_To_Action_Widget' ) ) {
 		 * @return array Updated safe values to be saved.
 		 */
 		public function update( $new_instance, $old_instance ) {
-			$instance          = array();
-			$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? sanitize_text_field( $new_instance['title'] ) : '';
+			$instance = array();
+
+			$instance['layout_type'] = ( ! empty( $new_instance['layout_type'] ) ) ? sanitize_text_field( $new_instance['layout_type'] ) : '';
+			$instance['layout_one']  = ( ! empty( $new_instance['layout_one'] ) ) ? galaxy_store_sanitize( $new_instance['layout_one'] ) : array();
+			$instance['layout_two']  = ( ! empty( $new_instance['layout_two'] ) ) ? galaxy_store_sanitize( $new_instance['layout_two'] ) : array();
 			return $instance;
 		}
 

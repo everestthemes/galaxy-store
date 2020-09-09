@@ -1,4 +1,3 @@
-
 		<div class="blog-posts section_padd60 section-bg1">
 			<div class="container">
 				<div class="section-header">

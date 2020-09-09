@@ -71,7 +71,7 @@ if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
 					wp_dropdown_categories(
 						array(
 							'taxonomy'        => 'product_cat',
-							'show_option_all' => esc_html__( 'Select Category', 'orchid-store' ),
+							'show_option_all' => esc_html__( 'Select Category', 'galaxy-store' ),
 							'name'            => $this->get_field_name( 'product_category' ),
 							'id'              => $this->get_field_id( 'product_category' ),
 							'class'           => 'widefat',
