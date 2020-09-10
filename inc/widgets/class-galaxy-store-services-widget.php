@@ -55,7 +55,7 @@ if ( ! class_exists( 'Galaxy_Store_Services_Widget' ) ) {
 			?>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-					<?php esc_attr_e( 'Title:', 'galaxy-store' ); ?>
+					<strong><?php esc_html_e( 'Title:', 'galaxy-store' ); ?></strong>
 				</label>
 				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 			</p>
