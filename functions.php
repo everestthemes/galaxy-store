@@ -12,6 +12,30 @@ if ( ! defined( 'GALAXY_STORE_VERSION' ) ) {
 	define( 'GALAXY_STORE_VERSION', '1.0.0' );
 }
 
+
+if ( ! function_exists( 'galaxy_store_get_template_part' ) ) {
+
+	/**
+	 * As, get_template_part does not accept any args before wp 5.5, we have this custom function as work around.
+	 *
+	 * @param string $slug The slug name for the generic template.
+	 * @param string $name The name of the specialised template.
+	 * @param array  $data Optional. Additional arguments passed to the template.
+	 *                     Default empty array.
+	 */
+	function galaxy_store_get_template_part( $slug, $name = null, $data = array() ) {
+		$template = '';
+		$name     = (string) $name;
+		if ( '' !== $name ) {
+			$template = "{$slug}-{$name}.php";
+		}
+
+		$template = "{$slug}.php";
+		include locate_template( $template, false, false );
+
+	}
+}
+
 if ( ! function_exists( 'galaxy_store_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.

@@ -40,7 +40,10 @@ if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			get_template_part( 'template-parts/frontpage/banner' );
+
+			echo $args['before_widget']; //phpcs:ignore
+			galaxy_store_get_template_part( 'template-parts/frontpage/banner', null, $instance );
+			echo $args['after_widget']; //phpcs:ignore
 		}
 
 		/**
@@ -52,8 +55,9 @@ if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
 		 */
 		public function form( $instance ) {
 
-			$bg_image_id = $this->get_field_id( 'background-image' );
-			$image_uri   = ! empty( $instance['image_uri'] ) ? $instance['image_uri'] : '';
+			$bg_image_id  = $this->get_field_id( 'background-image' );
+			$image_uri    = ! empty( $instance['image_uri'] ) ? $instance['image_uri'] : '';
+			$button_label = ! empty( $instance['button_label'] ) ? $instance['button_label'] : __( 'View Product', 'galaxy-store' );
 			?>
 			<p>
 				<label for="<?php echo esc_attr( $bg_image_id ); ?>">
@@ -82,6 +86,12 @@ if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
 					);
 				?>
 			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'button-label' ) ); ?>">
+					<strong><?php esc_html_e( 'Button Label:', 'galaxy-store' ); ?></strong>
+				</label>
+				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'button-label' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'button_label' ) ); ?>" type="text" value="<?php echo esc_attr( $button_label ); ?>">
+			</p>
 			<?php
 		}
 
@@ -100,6 +110,7 @@ if ( ! class_exists( 'Galaxy_Store_Banner_Widget' ) ) {
 
 			$instance['image_uri']        = ( ! empty( $new_instance['image_uri'] ) ) ? esc_url_raw( $new_instance['image_uri'] ) : '';
 			$instance['product_category'] = ( ! empty( $new_instance['product_category'] ) ) ? sanitize_text_field( $new_instance['product_category'] ) : '';
+			$instance['button_label']     = ( ! empty( $new_instance['button_label'] ) ) ? sanitize_text_field( $new_instance['button_label'] ) : __( 'View Product', 'galaxy-store' );
 			return $instance;
 		}
 
