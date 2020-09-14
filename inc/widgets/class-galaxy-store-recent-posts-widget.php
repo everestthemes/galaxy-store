@@ -40,7 +40,9 @@ if ( ! class_exists( 'Galaxy_Store_Recent_Posts_Widget' ) ) {
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			get_template_part( 'template-parts/frontpage/recent-posts' );
+			echo $args['before_widget']; //phpcs:ignore
+			galaxy_store_get_template_part( 'template-parts/frontpage/recent-posts', null, $instance );
+			echo $args['after_widget']; //phpcs:ignore
 		}
 
 		/**
@@ -64,20 +66,20 @@ if ( ! class_exists( 'Galaxy_Store_Recent_Posts_Widget' ) ) {
 				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 			</p>
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'product_category' ) ); ?>">
+				<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>">
 					<strong><?php esc_html_e( 'Select Category:', 'galaxy-store' ); ?></strong>
 				</label>
 				<?php
 					wp_dropdown_categories(
 						array(
-							'taxonomy'        => 'product_cat',
+							'taxonomy'        => 'category',
 							'show_option_all' => esc_html__( 'Select Category', 'galaxy-store' ),
-							'name'            => $this->get_field_name( 'product_category' ),
-							'id'              => $this->get_field_id( 'product_category' ),
+							'name'            => $this->get_field_name( 'category' ),
+							'id'              => $this->get_field_id( 'category' ),
 							'class'           => 'widefat',
 							'value_field'     => 'slug',
 							'hide_empty'      => 1,
-							'selected'        => isset( $instance['product_category'] ) ? $instance['product_category'] : '',
+							'selected'        => isset( $instance['category'] ) ? $instance['category'] : '',
 						)
 					);
 				?>
@@ -121,9 +123,13 @@ if ( ! class_exists( 'Galaxy_Store_Recent_Posts_Widget' ) ) {
 		 * @return array Updated safe values to be saved.
 		 */
 		public function update( $new_instance, $old_instance ) {
-			$instance                    = array();
-			$instance['title']           = ( ! empty( $new_instance['title'] ) ) ? sanitize_text_field( $new_instance['title'] ) : '';
-			$instance['number_of_posts'] = ( ! empty( $new_instance['number_of_posts'] ) ) ? sanitize_text_field( $new_instance['number_of_posts'] ) : '';
+			$instance                       = array();
+			$instance['title']              = ( ! empty( $new_instance['title'] ) ) ? sanitize_text_field( $new_instance['title'] ) : '';
+			$instance['category']           = ( ! empty( $new_instance['category'] ) ) ? sanitize_text_field( $new_instance['category'] ) : '';
+			$instance['number_of_posts']    = ( ! empty( $new_instance['number_of_posts'] ) ) ? sanitize_text_field( $new_instance['number_of_posts'] ) : '';
+			$instance['hide_author_name']   = ( ! empty( $new_instance['hide_author_name'] ) ) ? sanitize_text_field( $new_instance['hide_author_name'] ) : '';
+			$instance['hide_category_name'] = ( ! empty( $new_instance['hide_category_name'] ) ) ? sanitize_text_field( $new_instance['hide_category_name'] ) : '';
+			$instance['hide_post_date']     = ( ! empty( $new_instance['hide_post_date'] ) ) ? sanitize_text_field( $new_instance['hide_post_date'] ) : '';
 			return $instance;
 		}
 

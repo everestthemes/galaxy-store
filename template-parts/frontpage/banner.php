@@ -1,10 +1,12 @@
 <?php
 /**
  * Widget template file for the frontend.
- * We are loading this template and passing the args ( $data ) from
- * respective widget class using the custom function ( galaxy_store_get_template_part ) that replicates like
- * get_template_part function but also provides option to pass args.
  *
+ * * We are loading this template and passing the args ( $data ) from
+ * * respective widget class using the custom function ( galaxy_store_get_template_part ) that replicates like
+ * * get_template_part function but also provides option to pass args.
+ *
+ * @see galaxy_store_get_template_part()
  * @package galaxy-store
  */
 

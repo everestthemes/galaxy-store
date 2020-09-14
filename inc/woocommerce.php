@@ -225,3 +225,14 @@ if ( ! function_exists( 'galaxy_store_woocommerce_header_cart' ) ) {
 		<?php
 	}
 }
+
+
+function galaxy_store_product_term_thumbnail_url( $term_id ) {
+	if ( ! $term_id ) {
+		return;
+	}
+
+	$thumbnail_id = get_term_meta( $term_id, 'thumbnail_id', true );
+	return wp_get_attachment_url( $thumbnail_id );
+}
+

@@ -40,7 +40,9 @@ if ( ! class_exists( 'Galaxy_Store_Featured_Products_Widget' ) ) {
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			get_template_part( 'template-parts/frontpage/featured-products' );
+			echo $args['before_widget']; //phpcs:ignore
+			galaxy_store_get_template_part( 'template-parts/frontpage/featured-products', null, $instance );
+			echo $args['after_widget']; //phpcs:ignore
 		}
 
 		/**

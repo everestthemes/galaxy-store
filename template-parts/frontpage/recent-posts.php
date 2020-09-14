@@ -1,155 +1,117 @@
-		<div class="blog-posts section_padd60 section-bg1">
-			<div class="container">
-				<div class="section-header">
-					<span>our blog</span>
-				</div>
-				<div class="owl-carousel blog-slider">
-					<div class="item">
-						<div class="single-blog-post">
-							<div class="blog-media">
-								<img src="images/blog-img-1.jpg" alt="images">
-							</div>
-							<div class="blog-content">
-								<div class="user-section">
-									<div class="user-img">
-										<img src="images/human-1.jpg" alt="image">
-									</div>
-									<ul class="blog-page-meta">
-										<li class="author">
-											<a href="#">
-												Admin
-											</a>
-										</li>
-										<li class="date">
-											<a href="#">
-												<i class="icon-calendar"></i> 24 April, 2020
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="cat-tags">
-									<ul>
-										<li>
-											<a href="#">Fashion</a>
-										</li>
-										<li>
-											<a href="#">Blog</a>
-										</li>
-									</ul>
-								</div>
-								<h4 class="blog-title">
-									<a href="#">This is Third Post For XipBlog</a>
-								</h4>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum eius expedita hic, vel minima minus reiciendis consequuntur ab beatae necessitatibus amet magni itaque, nostrum vero eos
-									nobis modi temporibus recusandae.
-								</p>
+<?php
+/**
+ * Widget template file for the frontend.
+ *
+ * * We are loading this template and passing the args ( $data ) from
+ * * respective widget class using the custom function ( galaxy_store_get_template_part ) that replicates like
+ * * get_template_part function but also provides option to pass args.
+ *
+ * @see galaxy_store_get_template_part()
+ * @package galaxy-store
+ */
 
+/**
+ * Exit if accessed directly.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-							</div>
-						</div>
-					</div>
+$args = array(
+	'post_type'      => 'post',
+	'posts_per_page' => isset( $data['number_of_posts'] ) ? $data['number_of_posts'] : 10,
+);
 
-					<div class="item">
-						<div class="single-blog-post">
-							<div class="blog-media">
-								<img src="images/blog-img-2.jpg" alt="images">
-							</div>
-							<div class="blog-content">
-								<div class="user-section">
-									<div class="user-img">
-										<img src="images/human-1.jpg" alt="image">
-									</div>
-									<ul class="blog-page-meta">
-										<li class="author">
-											<a href="#">
-												Admin
-											</a>
-										</li>
-										<li class="date">
-											<a href="#">
-												<i class="icon-calendar"></i> 24 April, 2020
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="cat-tags">
-									<ul>
-										<li>
-											<a href="#">Fashion</a>
-										</li>
-										<li>
-											<a href="#">Blog</a>
-										</li>
-										<li>
-											<a href="#">Food</a>
-										</li>
-										<li>
-											<a href="#">Doctor</a>
-										</li>
-									</ul>
-								</div>
-								<h4 class="blog-title">
-									<a href="#">Country road</a>
-								</h4>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum eius expedita hic, vel minima minus reiciendis consequuntur ab beatae necessitatibus amet magni itaque, nostrum vero eos
-									nobis modi temporibus recusandae.
-								</p>
-							</div>
-						</div>
-					</div>
+if ( ! empty( $data['category'] ) ) {
+	$args['tax_query'] = array(
+		array(
+			'taxonomy' => 'category',
+			'field'    => 'slug',
+			'terms'    => $data['category'],
+		),
+	);
+}
 
-					<div class="item">
-						<div class="single-blog-post">
-							<div class="blog-media">
-								<img src="images/blog-img-1.jpg" alt="images">
-							</div>
-							<div class="blog-content">
-								<div class="user-section">
-									<div class="user-img">
-										<img src="images/human-2.jpg" alt="image">
-									</div>
-									<ul class="blog-page-meta">
-										<li class="author">
-											<a href="#">
-												Admin
-											</a>
-										</li>
-										<li class="date">
-											<a href="#">
-												<i class="icon-calendar"></i> 24 April, 2020
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="cat-tags">
-									<ul>
-										<li>
-											<a href="#">Fashion</a>
-										</li>
-										<li>
-											<a href="#">Blog</a>
-										</li>
-										<li>
-											<a href="#">Food</a>
-										</li>
-										<li>
-											<a href="#">Doctor</a>
-										</li>
-									</ul>
-								</div>
-								<h4 class="blog-title">
-									<a href="#">Country road</a>
-								</h4>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum eius expedita hic, vel minima minus reiciendis consequuntur ab beatae necessitatibus amet magni itaque, nostrum vero eos
-									nobis modi temporibus recusandae.
-								</p>
-							</div>
-						</div>
-					</div>
+$the_query = new WP_Query( $args );
 
-				</div>
-			</div>
+?>
+<div class="blog-posts section_padd60 section-bg1">
+	<div class="container">
+		<?php if ( ! empty( $data['title'] ) ) { ?>
+		<div class="section-header">
+			<span><?php echo esc_html( $data['title'] ); ?></span>
 		</div>
+		<?php } ?>
+
+		<div class="owl-carousel blog-slider">
+			<?php
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				?>
+				<div class="item">
+					<div class="single-blog-post">
+
+						<?php if ( has_post_thumbnail() ) { ?>
+							<div class="blog-media">
+								<?php the_post_thumbnail(); ?>
+							</div>
+						<?php } ?>
+
+						<div class="blog-content">
+							<div class="user-section">
+
+								<div class="user-img">
+									<?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?>
+								</div>
+
+								<ul class="blog-page-meta">
+
+									<?php if ( empty( $data['hide_author_name'] ) ) { ?>
+										<li class="author">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_author(); ?>
+											</a>
+										</li>
+									<?php } ?>
+
+									<?php if ( empty( $data['hide_post_date'] ) ) { ?>
+										<li class="date">
+											<a href="<?php the_permalink(); ?>">
+												<i class="icon-calendar"></i> <?php echo esc_html( get_the_date() ); ?>
+											</a>
+										</li>
+									<?php } ?>
+
+								</ul>
+							</div>
+
+							<?php if ( empty( $data['hide_category_name'] ) ) { ?>
+								<div class="cat-tags">
+									<ul>
+										<?php wp_list_categories(); ?>
+									</ul>
+								</div>
+							<?php } ?>
+
+							<?php
+							the_title(
+								'<h4 class="blog-title"><a href="' . esc_url( get_the_permalink() ) . '">',
+								'</a></h4>'
+							);
+
+							the_excerpt();
+							?>
+
+						</div>
+					</div>
+				</div>
+
+				<?php
+			}
+			?>
+
+		</div>
+	</div>
+</div>
+<?php
+wp_reset_postdata();

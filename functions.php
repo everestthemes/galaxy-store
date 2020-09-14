@@ -16,7 +16,7 @@ if ( ! defined( 'GALAXY_STORE_VERSION' ) ) {
 if ( ! function_exists( 'galaxy_store_get_template_part' ) ) {
 
 	/**
-	 * As, get_template_part does not accept any args before wp 5.5, we have this custom function as work around.
+	 * As, get_template_part does not accept any args before WordPress 5.5, we have this custom function as work around.
 	 *
 	 * @param string $slug The slug name for the generic template.
 	 * @param string $name The name of the specialised template.
