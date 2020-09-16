@@ -26,13 +26,14 @@ if ( ! function_exists( 'galaxy_store_get_template_part' ) ) {
 	function galaxy_store_get_template_part( $slug, $name = null, $data = array() ) {
 		$template = '';
 		$name     = (string) $name;
+
+		$template = "{$slug}.php";
+
 		if ( '' !== $name ) {
 			$template = "{$slug}-{$name}.php";
 		}
 
-		$template = "{$slug}.php";
 		include locate_template( $template, false, false );
-
 	}
 }
 

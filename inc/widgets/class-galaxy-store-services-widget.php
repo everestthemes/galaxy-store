@@ -40,7 +40,9 @@ if ( ! class_exists( 'Galaxy_Store_Services_Widget' ) ) {
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			get_template_part( 'template-parts/frontpage/services' );
+			echo $args['before_widget']; //phpcs:ignore
+			galaxy_store_get_template_part( 'template-parts/frontpage/services', null, $instance );
+			echo $args['after_widget']; //phpcs:ignore
 		}
 
 		/**
@@ -51,13 +53,34 @@ if ( ! class_exists( 'Galaxy_Store_Services_Widget' ) ) {
 		 * @param array $instance Previously saved values from database.
 		 */
 		public function form( $instance ) {
-			$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
+			$number_of_posts = ! empty( $instance['number_of_posts'] ) ? $instance['number_of_posts'] : '';
 			?>
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-					<strong><?php esc_html_e( 'Title:', 'galaxy-store' ); ?></strong>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>">
+					<strong><?php esc_html_e( 'Select Category:', 'galaxy-store' ); ?></strong>
 				</label>
-				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+				<?php
+					wp_dropdown_categories(
+						array(
+							'taxonomy'        => 'category',
+							'show_option_all' => esc_html__( 'Select Category', 'galaxy-store' ),
+							'name'            => $this->get_field_name( 'category' ),
+							'id'              => $this->get_field_id( 'category' ),
+							'class'           => 'widefat',
+							'value_field'     => 'slug',
+							'hide_empty'      => 1,
+							'required'        => true,
+							'selected'        => isset( $instance['category'] ) ? $instance['category'] : '',
+						)
+					);
+				?>
+				<p class="description"><?php esc_html_e( 'Select a category for services section. It is a required field for this section widget.', 'galaxy-store' ); ?></p>
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'number_of_posts' ) ); ?>">
+					<strong><?php esc_html_e( 'Number Of Posts:', 'galaxy-store' ); ?></strong>
+				</label>
+				<input class="tiny-text" id="<?php echo esc_attr( $this->get_field_id( 'number_of_posts' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'number_of_posts' ) ); ?>" type="number" min="1" value="<?php echo esc_attr( $number_of_posts ); ?>">
 			</p>
 			<?php
 		}
@@ -73,8 +96,9 @@ if ( ! class_exists( 'Galaxy_Store_Services_Widget' ) ) {
 		 * @return array Updated safe values to be saved.
 		 */
 		public function update( $new_instance, $old_instance ) {
-			$instance          = array();
-			$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? sanitize_text_field( $new_instance['title'] ) : '';
+			$instance                    = array();
+			$instance['category']        = ( ! empty( $new_instance['category'] ) ) ? sanitize_text_field( $new_instance['category'] ) : '';
+			$instance['number_of_posts'] = ( ! empty( $new_instance['number_of_posts'] ) ) ? sanitize_text_field( $new_instance['number_of_posts'] ) : '';
 			return $instance;
 		}
 

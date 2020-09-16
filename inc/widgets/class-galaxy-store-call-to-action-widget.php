@@ -40,7 +40,12 @@ if ( ! class_exists( 'Galaxy_Store_Call_To_Action_Widget' ) ) {
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			get_template_part( 'template-parts/frontpage/call-to-action' );
+
+			$layout_type = ! empty( $instance['layout_type'] ) ? $instance['layout_type'] : 'layout_one';
+
+			echo $args['before_widget']; //phpcs:ignore
+			galaxy_store_get_template_part( 'template-parts/frontpage/call-to-action', $layout_type, $instance );
+			echo $args['after_widget']; //phpcs:ignore
 		}
 
 
@@ -217,9 +222,12 @@ if ( ! class_exists( 'Galaxy_Store_Call_To_Action_Widget' ) ) {
 		public function update( $new_instance, $old_instance ) {
 			$instance = array();
 
+			$layout_one_old = ! empty( $old_instance['layout_one'] ) ? $old_instance['layout_one'] : array();
+			$layout_two_old = ! empty( $old_instance['layout_two'] ) ? $old_instance['layout_two'] : array();
+
 			$instance['layout_type'] = ( ! empty( $new_instance['layout_type'] ) ) ? sanitize_text_field( $new_instance['layout_type'] ) : '';
-			$instance['layout_one']  = ( ! empty( $new_instance['layout_one'] ) ) ? galaxy_store_sanitize( $new_instance['layout_one'] ) : array();
-			$instance['layout_two']  = ( ! empty( $new_instance['layout_two'] ) ) ? galaxy_store_sanitize( $new_instance['layout_two'] ) : array();
+			$instance['layout_one']  = ( ! empty( $new_instance['layout_one'] ) ) ? galaxy_store_sanitize( $new_instance['layout_one'] ) : $layout_one_old;
+			$instance['layout_two']  = ( ! empty( $new_instance['layout_two'] ) ) ? galaxy_store_sanitize( $new_instance['layout_two'] ) : $layout_two_old;
 			return $instance;
 		}
 

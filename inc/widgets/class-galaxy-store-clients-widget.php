@@ -40,7 +40,9 @@ if ( ! class_exists( 'Galaxy_Store_Clients_Widget' ) ) {
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			get_template_part( 'template-parts/frontpage/clients' );
+			echo $args['before_widget']; //phpcs:ignore
+			galaxy_store_get_template_part( 'template-parts/frontpage/clients', null, $instance );
+			echo $args['after_widget']; //phpcs:ignore
 		}
 
 		/**
