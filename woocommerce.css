@@ -4,6 +4,10 @@ Theme Name: Galaxy Store
 WooCommerce styles override
 */
 
+.ajax_add_to_cart.added {
+	display: none !important;
+}
+
 /**
  * Shop tables
  */

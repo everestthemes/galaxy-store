@@ -216,9 +216,7 @@ jQuery(document).ready(function($) {
     =======================================
     */
 
-    $('div.tab-content').hide();
-
-    $('div#tab1').show('fast');
+    $('div.tab-content').slice(1).hide();
 
     $('body').on('click', '.tab-nav ul li a', function(e) {
 
@@ -229,8 +227,6 @@ jQuery(document).ready(function($) {
         var activeA = parentLi.siblings().find('a.active');
 
         var activeARel = activeA.attr('rel');
-
-        console.log( activeARel );
 
         $(this).parents('div.tab-wrapper').find('div#' + activeARel).hide();
 
