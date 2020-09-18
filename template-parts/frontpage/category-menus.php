@@ -88,11 +88,11 @@ if ( empty( $data['product_categories'] ) ) {
 													<?php the_post_thumbnail( array( 250, 250 ) ); ?>
 													<div class="prod-hover">
 														<ul>
-															<li>
-																<a href="">
-																	<i class="icon-magnifier"></i>
-																</a>
-															</li>
+															<?php if ( ! empty( $data['enable_quick_search'] ) ) { ?>
+																<li>
+																	<?php get_template_part( 'addonify/addonify-quick-view-button' ); ?>
+																</li>
+															<?php } ?>
 															<li>
 																<a href="">
 																	<i class="icon-heart"></i>
@@ -114,10 +114,12 @@ if ( empty( $data['product_categories'] ) ) {
 															<?php echo $price_html; // phpcs:ignore ?>
 														</span>
 													</div>
+
 													<div class="addcart">
 														<i class="icon-bag"></i>
 														<?php woocommerce_template_loop_add_to_cart(); ?>
 													</div>
+
 												</div>
 											</div>
 										</li>

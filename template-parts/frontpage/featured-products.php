@@ -20,10 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $args = array(
 	'post_type'      => 'product',
-	'meta_key'       => '_featured',
-	'meta_value'     => 'yes',
 	'posts_per_page' => 8,
+	'post__in'       => wc_get_featured_product_ids(),
 );
+
 
 $the_query = new WP_Query( $args );
 
@@ -48,59 +48,74 @@ $the_query = new WP_Query( $args );
 					<?php
 					while ( $the_query->have_posts() ) {
 						$the_query->the_post();
+
+						$product_catogories = get_the_terms( get_the_ID(), 'product_cat' );
+						$product_catogory   = ! is_wp_error( $product_catogories ) && is_object( $product_catogories ) ? wp_list_pluck( $product_catogories, 'name', 'term_id' ) : array();
+
+						$wc_product_detail = wc_get_product( get_the_ID() );
+						$price_html        = is_object( $wc_product_detail ) ? $wc_product_detail->get_price_html() : '';
+
 						?>
 						<li class="product">
 							<div class="single-prod-detail">
 								<div class="wrap-div">
+
 									<div class="img-holder">
-										<img src="images/product-3.jpg" alt="image">
+										<img src="<?php the_post_thumbnail_url(); ?>">
 									</div>
+
 									<div class="text-holder">
-										<h3>
-											<a href="#">Wooden single drawer</a>
-										</h3>
 										<?php
 										the_title(
 											'<h3><a href="' . esc_url( get_the_permalink() ) . '">',
 											'</a></h3>'
 										);
 										?>
+
 										<div class="product-cats">
-											<a href="#">accesories</a>, <a href="#">furniture</a>
+											<?php
+											if ( is_array( $product_catogory ) && ! empty( $product_catogory ) ) {
+												foreach ( $product_catogory as $prod_cat_id => $product_cat_name ) {
+													?>
+													<a href="<?php echo esc_url( get_the_permalink( $prod_cat_id ) ); ?>"><?php echo esc_html( $product_cat_name ); ?></a>
+													<?php
+												}
+											}
+											?>
 										</div>
+
 										<div class="wrapp-product-price">
 											<span class="price">
-												<del><span>$799.00</span></del>
-												<ins><span>$399.00</span></ins>
+												<?php echo $price_html; // phpcs:ignore ?>
 											</span>
 										</div>
+
 										<div class="fade-block">
 											<div class="product-info">
-												<p>
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-													tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-												</p>
+												<?php the_excerpt(); ?>
 											</div>
+
 											<div class="wrap-add-cart">
+
 												<div class="wishlist">
 													<a href="#">
 														<i class="icon-heart"></i>
-														<span class="tool">add to wishlist</span>
 													</a>
 												</div>
+
 												<div class="addcart">
-													<a href="#" class="bg-button">
-														<i class="icon-bag"></i>
-														add to cart
-													</a>
+													<i class="icon-bag"></i>
+													<?php woocommerce_template_loop_add_to_cart(); ?>
 												</div>
-												<div class="quick-view">
-													<a href="#">
-														<i class="icon-magnifier"></i>
-														<span class="tool">quick search</span>
-													</a>
-												</div>
+
+												<?php if ( ! empty( $data['enable_quick_search'] ) ) { ?>
+													<div class="quick-view">
+														<?php get_template_part( 'addonify/addonify-quick-view-button' ); ?>
+													</div>
+												<?php } ?>
+
 											</div>
+
 										</div>
 									</div>
 								</div>

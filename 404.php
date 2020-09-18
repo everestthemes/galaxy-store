@@ -10,51 +10,23 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+	<main class="content">
+		<div class="page-404">
+			<div class="container">
+				<div class="text-holder">
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'galaxy-store' ); ?></h1>
-			</header><!-- .page-header -->
+					<span><?php echo wp_kses_post( __( '404', 'galaxy-store' ) . '<br>' . __( 'Page Not Found', 'galaxy-store' ) ); ?></span>
 
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'galaxy-store' ); ?></p>
+					<h1><?php esc_html_e( 'Don\'t Worry !', 'galaxy-store' ); ?></h1>
 
-					<?php
-					get_search_form();
+					<h2><?php esc_html_e( 'You are not lost', 'galaxy-store' ); ?></h2>
 
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
+					<?php get_search_form(); ?>
 
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'galaxy-store' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$galaxy_store_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'galaxy-store' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$galaxy_store_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
-
-	</main><!-- #main -->
+				</div>
+			</div>
+		</div>
+	</main>
 
 <?php
 get_footer();

@@ -72,7 +72,7 @@ if ( ! class_exists( 'Galaxy_Store_Featured_Products_Widget' ) ) {
 			<p>
 				<label>
 					<input type="checkbox" <?php checked( $enable_quick_search, 'yes' ); ?> id="<?php echo esc_attr( $this->get_field_id( 'enable-quick-search' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'enable_quick_search' ) ); ?>" value="yes">
-					<span><?php esc_html_e( 'Enable Quick Search', 'galaxy-store' ); ?></span>
+					<span><?php esc_html_e( 'Enable Quick View', 'galaxy-store' ); ?></span>
 				</label>
 			</p>
 			<?php

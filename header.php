@@ -16,9 +16,6 @@ $misc_options_enable_mini_cart   = galaxy_store_get_theme_mod( 'misc_options_ena
 
 $special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title' );
 
-$galaxy_store_site_layout = galaxy_store_get_theme_mod( 'site_layout', 'boxed' );
-
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -30,7 +27,7 @@ $galaxy_store_site_layout = galaxy_store_get_theme_mod( 'site_layout', 'boxed' )
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class( $galaxy_store_site_layout ); ?>>
+<body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'galaxy-store' ); ?></a>
