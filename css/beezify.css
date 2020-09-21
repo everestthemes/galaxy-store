@@ -1,0 +1,225 @@
+@font-face {
+
+    font-family: 'beezify-brands-icon';
+    src: url('../fonts/beezify-brands-icon.eot?yylubu');
+    src: url('../fonts/beezify-brands-icon.eot?yylubu#iefix') format('embedded-opentype'),
+        url('../fonts/beezify-brands-icon.ttf?yylubu') format('truetype'),
+        url('../fonts/beezify-brands-icon.woff?yylubu') format('woff'),
+        url('../fonts/beezify-brands-icon.svg?yylubu#beezify-brands-icon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.bfy-icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'beezify-brands-icon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.bfy-facebook:before {
+    content: "\e900";
+}
+
+.bfy-facebook-circle:before {
+    content: "\e901";
+}
+
+.bfy-facebook-square:before {
+    content: "\e902";
+}
+
+.bfy-messenger:before {
+    content: "\e903";
+}
+
+.bfy-twitter:before {
+    content: "\e904";
+}
+
+.bfy-instagram-alt:before {
+    content: "\e905";
+}
+
+.bfy-instagram:before {
+    content: "\e906";
+}
+
+.bfy-pinterest:before {
+    content: "\e907";
+}
+
+.bfy-pinterest-alt:before {
+    content: "\e908";
+}
+
+.bfy-snapchat:before {
+    content: "\e909";
+}
+
+.bfy-vk:before {
+    content: "\e90a";
+}
+
+.bfy-youtube:before {
+    content: "\e90b";
+}
+
+.bfy-google:before {
+    content: "\e90c";
+}
+
+.bfy-google-plus:before {
+    content: "\e90d";
+}
+
+.bfy-telegram:before {
+    content: "\e90e";
+}
+
+.bfy-spotify:before {
+    content: "\e90f";
+}
+
+.bfy-soundcloud:before {
+    content: "\e910";
+}
+
+.bfy-pocket:before {
+    content: "\e911";
+}
+
+.bfy-reddit:before {
+    content: "\e912";
+}
+
+.bfy-quora:before {
+    content: "\e913";
+}
+
+.bfy-linkedin:before {
+    content: "\e914";
+}
+
+.bfy-medium:before {
+    content: "\e915";
+}
+
+.bfy-medium-square:before {
+    content: "\e916";
+}
+
+.bfy-whatsapp:before {
+    content: "\e917";
+}
+
+.bfy-behance:before {
+    content: "\e918";
+}
+
+.bfy-tiktok:before {
+    content: "\e919";
+}
+
+.bfy-vimeo:before {
+    content: "\e91a";
+}
+
+.bfy-tumblr:before {
+    content: "\e91b";
+}
+
+.bfy-dailymotion:before {
+    content: "\e91c";
+}
+
+.bfy-digg:before {
+    content: "\e91d";
+}
+
+.bfy-discord:before {
+    content: "\e91e";
+}
+
+.bfy-twitch:before {
+    content: "\e91f";
+}
+
+.bfy-dribbble:before {
+    content: "\e920";
+}
+
+.bfy-codepen:before {
+    content: "\e921";
+}
+
+.bfy-github:before {
+    content: "\e922";
+}
+
+.bfy-gitlab:before {
+    content: "\e923";
+}
+
+.bfy-figma:before {
+    content: "\e924";
+}
+
+.bfy-foursquare:before {
+    content: "\e925";
+}
+
+.bfy-yelp:before {
+    content: "\e926";
+}
+
+.bfy-etsy:before {
+    content: "\e927";
+}
+
+.bfy-kickstarter:before {
+    content: "\e928";
+}
+
+.bfy-patreon:before {
+    content: "\e929";
+}
+
+.bfy-play-store:before {
+    content: "\e92a";
+}
+
+.bfy-airbnb:before {
+    content: "\e92b";
+}
+
+.bfy-wikipedia:before {
+    content: "\e92c";
+}
+
+.bfy-blogger:before {
+    content: "\e92d";
+}
+
+.bfy-wordpress:before {
+    content: "\e92e";
+}
+
+.bfy-paypal:before {
+    content: "\e92f";
+}
+
+.bfy-ebay:before {
+    content: "\e930";
+}
+
+.bfy-amazon:before {
+    content: "\e931";
+}
