@@ -104,7 +104,6 @@ $the_query = new WP_Query( $args );
 												</div>
 
 												<div class="addcart">
-													<i class="icon-bag"></i>
 													<?php woocommerce_template_loop_add_to_cart(); ?>
 												</div>
 
