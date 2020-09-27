@@ -39,7 +39,11 @@ get_header();
 
 				</div>
 
-				<?php get_sidebar(); ?>
+				<?php
+
+				! galaxy_store_is_woocommerce_page() ? get_sidebar() : null;
+
+				?>
 
 			</div>
 		</div>
