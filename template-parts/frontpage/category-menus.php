@@ -31,7 +31,7 @@ if ( empty( $data['product_categories'] ) ) {
 			</div>
 		<?php } ?>
 
-		<div class="tab-wrapper">
+		<div class="tab-wrapper layout-1">
 
 			<div class="tab-nav">
 				<ul>

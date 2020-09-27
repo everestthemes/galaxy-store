@@ -43,7 +43,12 @@ add_action( 'after_setup_theme', 'galaxy_store_woocommerce_setup' );
  * @return void
  */
 function galaxy_store_woocommerce_scripts() {
-	wp_enqueue_style( 'galaxy-store-woocommerce-style', get_template_directory_uri() . '/woocommerce.css', array(), GALAXY_STORE_VERSION );
+	wp_enqueue_style(
+		'galaxy-store-woocommerce-style',
+		get_template_directory_uri() . '/woocommerce.css',
+		array(),
+		GALAXY_STORE_VERSION
+	);
 
 	$font_path   = WC()->plugin_url() . '/assets/fonts/';
 	$inline_font = '@font-face {
@@ -69,7 +74,7 @@ add_action( 'wp_enqueue_scripts', 'galaxy_store_woocommerce_scripts' );
  *
  * @link https://docs.woocommerce.com/document/disable-the-default-stylesheet/
  */
-//add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+// add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
 
 /**
@@ -119,6 +124,8 @@ if ( ! function_exists( 'galaxy_store_woocommerce_wrapper_before' ) ) {
 	 */
 	function galaxy_store_woocommerce_wrapper_before() {
 		?>
+		<div class="page-content">
+			<div class="container">
 			<main id="primary" class="site-main">
 		<?php
 	}
@@ -136,6 +143,8 @@ if ( ! function_exists( 'galaxy_store_woocommerce_wrapper_after' ) ) {
 	function galaxy_store_woocommerce_wrapper_after() {
 		?>
 			</main><!-- #main -->
+			</div>
+		</div>
 		<?php
 	}
 }

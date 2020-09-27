@@ -377,8 +377,8 @@ function galaxy_store_scripts() {
 	wp_enqueue_style( 'galaxy-store-nice-select', get_template_directory_uri() . '/css/nice-select.css', array(), '1.0.0' );
 	wp_enqueue_style( 'galaxy-store-owl-carousel', get_template_directory_uri() . '/css/owl.carousel.min.css', array(), '2.3.4' );
 	wp_enqueue_style( 'galaxy-store-animate', get_template_directory_uri() . '/css/animate.css', array(), '1.0.0' );
-	wp_enqueue_style( 'galaxy-store-main-style', get_template_directory_uri() . '/css/style.css', array(), GALAXY_STORE_VERSION );
-	wp_enqueue_style( 'galaxy-store-responsive', get_template_directory_uri() . '/css/responsive.css', array(), GALAXY_STORE_VERSION );
+	wp_enqueue_style( 'galaxy-store-main-style', get_template_directory_uri() . '/css/style.css', array( 'galaxy-store-woocommerce-style' ), GALAXY_STORE_VERSION );
+	wp_enqueue_style( 'galaxy-store-responsive', get_template_directory_uri() . '/css/responsive.css', array( 'galaxy-store-woocommerce-style' ), GALAXY_STORE_VERSION );
 
 	wp_enqueue_style( 'galaxy-store-style', get_stylesheet_uri(), array(), GALAXY_STORE_VERSION );
 	wp_style_add_data( 'galaxy-store-style', 'rtl', 'replace' );
