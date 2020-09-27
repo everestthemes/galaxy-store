@@ -17,12 +17,14 @@
 		<?php
 		the_content();
 
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'galaxy-store' ),
-				'after'  => '</div>',
-			)
-		);
+		if ( ! galaxy_store_is_woocommerce_page() ) {
+			wp_link_pages(
+				array(
+					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'galaxy-store' ),
+					'after'  => '</div>',
+				)
+			);
+		}
 		?>
 	</div><!-- .entry-content -->
 

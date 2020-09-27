@@ -412,6 +412,12 @@ if ( ! function_exists( 'galaxy_store_admin_scripts' ) ) {
 	add_action( 'admin_enqueue_scripts', 'galaxy_store_admin_scripts' );
 }
 
+/**
+ * Returns true if current page relates to woocommerce by any means.
+ */
+function galaxy_store_is_woocommerce_page() {
+	return is_woocommerce() || is_cart() || is_checkout() || is_account_page();
+}
 
 /**
  * Implement the Custom Header feature.
