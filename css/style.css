@@ -779,7 +779,11 @@ main banner css layout-3
 /*============================================================================================================================
 button css
 ============================================================================================================================*/
-.bg-button {
+.bg-button,
+.woocommerce #respond input#submit, 
+.woocommerce a.button, 
+.woocommerce button.button, 
+.woocommerce input.button {
 	display: inline-block;
     width: auto;
     padding: 12px 20px;
@@ -792,10 +796,20 @@ button css
     font-weight: 500;
     border: 1px solid #F77426;
 }
-.bg-button:hover {
+.bg-button:hover,
+.woocommerce #respond input#submit:hover, 
+.woocommerce a.button:hover, 
+.woocommerce button.button:hover, 
+.woocommerce input.button:hover {
 	background: #ea5700;
 	border-color: #ea5700;
 	color: #fff;
+}
+ul.products li.product .button {
+	display: inline-block;
+}
+.woocommerce ul.products li.product .button {
+	margin-top: 0;
 }
 
 
@@ -1812,22 +1826,27 @@ aside css
     text-transform: capitalize;
     font-size: 14px;
 }
-.wrapp-product-price .price,
-.pricing-meta .price {
+.wrapp-product-price .price {
     display: block;
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 18px !important;
     line-height: 1.3;
-    font-weight: 600;
+    font-weight: 600 !important;
     color: #83b735;
 }
+.pricing-meta .price,
+.woocommerce ul.products li.product .price {
+	font-size: 15px;
+}
+
 .wrapp-product-price .price ins,
 .pricing-meta .price ins {
 	text-decoration: none;
 }
 .wrapp-product-price .price del,
-.pricing-meta .price del {
-	color: #BDBDBD;
+.pricing-meta .price del,
+.woocommerce ul.products li.product .price del {
+	color: #a3a3a3;
     font-weight: 400;
 }
 .single-prod-detail .wrap-add-cart {
@@ -2048,12 +2067,11 @@ aside css
 	text-align: center;
 }
 .lay-prod-wrap .prod-info h2 {
-	font-size: 16px;
-    margin-bottom: 5px;
+	font-size: 18px;
+    margin-bottom: 8px;
 }
 .lay-prod-wrap .prod-info a.bg-button {
-	padding: 10px 20px;
-    font-size: 12px;
+	font-size: 12px;
     margin-top: 0;
 }
 .lay-prod-wrap .prod-info .wrapp-product-price .price,
