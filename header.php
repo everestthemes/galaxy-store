@@ -124,25 +124,28 @@ $special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title' );
 
 				<div class="secondrow clearfix">
 
-					<div class="category-section">
+					<?php if ( has_nav_menu( 'special-menu' ) ) { ?>
+						<div class="category-section">
 
-						<?php if ( $special_menu_title ) { ?>
-							<div class="category-header">
-								<?php echo esc_html( $special_menu_title ); ?>
-							</div>
-						<?php } ?>
+							<?php if ( $special_menu_title ) { ?>
+								<div class="category-header">
+									<?php echo esc_html( $special_menu_title ); ?>
+								</div>
+							<?php } ?>
 
-						<?php
-						wp_nav_menu(
-							array(
-								'menu_class'     => 'category-nav',
-								'fallback_cb'    => 'galaxy_store_nav_menu_fallback',
-								'theme_location' => 'special-menu',
-							)
-						);
-						?>
+							<?php
+							wp_nav_menu(
+								array(
+									'container'      => null,
+									'menu_class'     => 'category-nav',
+									'fallback_cb'    => false,
+									'theme_location' => 'special-menu',
+								)
+							);
+							?>
 
-					</div>
+						</div>
+					<?php } ?>
 
 
 					<?php

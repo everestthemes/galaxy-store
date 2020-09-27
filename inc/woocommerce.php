@@ -71,6 +71,7 @@ add_action( 'wp_enqueue_scripts', 'galaxy_store_woocommerce_scripts' );
  */
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
+
 /**
  * Add 'woocommerce-active' class to the body tag.
  *
@@ -171,6 +172,25 @@ if ( ! function_exists( 'galaxy_store_woocommerce_cart_link_fragment' ) ) {
 }
 add_filter( 'woocommerce_add_to_cart_fragments', 'galaxy_store_woocommerce_cart_link_fragment' );
 
+
+/**
+ * Add to cart button modification.
+ */
+function galaxy_store_add_to_cart_button_html( $button, $product, $args ) {
+	$button = sprintf(
+		'<a href="%s" data-quantity="%s" class="bg-button %s" %s><i class="icon-bag"></i> %s</a>',
+		esc_url( $product->add_to_cart_url() ),
+		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
+		esc_attr( isset( $args['class'] ) ? $args['class'] : 'button' ),
+		isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
+		esc_html( $product->add_to_cart_text() )
+	);
+
+	return $button;
+}
+add_filter( 'woocommerce_loop_add_to_cart_link', 'galaxy_store_add_to_cart_button_html', 12, 3 );
+
+
 if ( ! function_exists( 'galaxy_store_woocommerce_cart_link' ) ) {
 	/**
 	 * Cart Link.
@@ -235,4 +255,3 @@ function galaxy_store_product_term_thumbnail_url( $term_id ) {
 	$thumbnail_id = get_term_meta( $term_id, 'thumbnail_id', true );
 	return wp_get_attachment_url( $thumbnail_id );
 }
-

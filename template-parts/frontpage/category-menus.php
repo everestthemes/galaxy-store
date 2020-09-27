@@ -93,11 +93,14 @@ if ( empty( $data['product_categories'] ) ) {
 																	<?php get_template_part( 'addonify/addonify-quick-view-button' ); ?>
 																</li>
 															<?php } ?>
-															<li>
-																<a href="">
-																	<i class="icon-heart"></i>
-																</a>
-															</li>
+
+															<?php if ( ! empty( $data['enable_wishlist'] ) ) { ?>
+																<li>
+																	<a href="">
+																		<i class="icon-heart"></i>
+																	</a>
+																</li>
+															<?php } ?>
 														</ul>
 													</div>
 												</div>
