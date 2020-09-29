@@ -1836,7 +1836,7 @@ aside css
 }
 .pricing-meta .price,
 .woocommerce ul.products li.product .price {
-	font-size: 15px;
+	font-size: 15px !important;
 }
 
 .wrapp-product-price .price ins,
@@ -2511,4 +2511,128 @@ body.quick-pop .quick-view-pop {
     width: 50%;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+/*=======================================================================================
+css for grid page layout 092292020
+========================================================================================*/
+.page-content {
+	padding: 70px 0;
+}
+#primary {
+	width: 65%;
+	float: left;	
+}
+#secondary {
+	width: 30%;
+	float: right;
+}
+.page-content.leftSidebar #primary {
+	float: right;
+}
+.page-content.leftSidebar #secondary {
+	float: left;
+}
+.page-content.fullwidth #primary, 
+.page-content.fullwidth #secondary {
+	float: none;
+	width: 100%;
+	margin-bottom: 20px;
+}
+.single-blog {
+	padding: 15px;
+}
+.single-blog .blog-content .user-section {
+	margin-top: -75px;
+}
+.single-blog .blog-content .user-section .user-img {
+    width: 120px;
+    height: 120px;
+}
+.single-blog .blog-content h4 {
+	font-size: 33px;
+}
+
+.wp-block-gallery {
+	overflow: hidden;
+	margin-left: -15px;
+}
+.wp-block-gallery li {
+	float: left;
+	width: 31%;
+	margin-left: 15px;
+}
+.post-navigation {
+	margin-bottom: 30px;
+}
+.post-navigation .nav-links {
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    
+}
+.comment-respond,
+.post-navigation .nav-links {
+	border: 1px solid #eef1fd;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    -ms-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.post-navigation .nav-next, 
+.post-navigation .nav-previous {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 30px;
+}
+.post-navigation .nav-previous {
+    border-right: 1px solid #ececec;
+}
+.post-navigation .nav-next span, 
+.post-navigation .nav-previous span {
+	display: block;
+    color: #F77426;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.post-navigation .nav-previous {
+	text-align: right;
+}
+.comment-respond,
+.post-navigation .nav-links {
+	border: 1px solid #eef1fd;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    -ms-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    background: #fff;
+}
+.comment-respond h3 {
+	text-transform: uppercase;
+	font-size: 24px;
+	margin-bottom: 15px;
+}
+.comment-respond {
+	padding: 15px;
+}
+blockquote.wp-block-quote {
+	position: relative;
+	border: 0.5px solid #f774263d;
+    border-left: 10px solid #f77426;
+    padding: 15px 20px;
+
+}
+blockquote.wp-block-quote p {
+	margin-bottom: 5px; 
+	font-size: 18px;
 }
