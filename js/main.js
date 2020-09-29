@@ -204,6 +204,19 @@ jQuery(document).ready(function($) {
     });
 
 
+    /**
+     * Header search form, ajax.
+     */
+    if ( null !== document.getElementById('galaxy-store-header-search') ) {
+        var searchField = '#header-search-keyword';
+        var categoryField = '#header-search-product-category';
+        $(document).on('input', searchField, function() {
+            var keyword = '';
+            keyword = $(searchField).val();
+        });
+    }
+
+
     /*countdown js*/
 
     $(".date-count").countdown({

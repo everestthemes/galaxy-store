@@ -117,290 +117,58 @@ $payment_option_logos  = galaxy_store_get_theme_mod( 'payment_option_logos' );
 	</div>
 </footer>
 
-<!-- Mobile category view  -->
-<div class="mob-category">
-	<div class="close">
-		<i class="icon-close"></i>
-	</div>
-	<div class="category-header">
-		All Departments
-	</div>
-	<ul class="category-nav">
-		<li>
-			<a href="#">
-				Brands
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				Fashion
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				New Arrival
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				TV &amp; Audio
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				Accessories
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				Brands
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				Fashion
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				New Arrival
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				TV &amp; Audio
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				Accessories
-			</a>
-		</li>
-	</ul>
-</div>
+<?php
+if ( has_nav_menu( 'special-menu' ) ) {
+
+	$special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title' );
+	?>
+	<div class="mob-category">
+
+		<div class="close">
+			<i class="icon-close"></i>
+		</div>
+
+		<?php if ( $special_menu_title ) { ?>
+			<div class="category-header">
+				<?php echo esc_html( $special_menu_title ); ?>
+			</div>
+		<?php } ?>
+
+		<?php
+		wp_nav_menu(
+			array(
+				'container'      => null,
+				'menu_class'     => 'category-nav',
+				'fallback_cb'    => false,
+				'theme_location' => 'special-menu',
+			)
+		);
+		?>
+
+	</div><!-- .mob-category -->
+<?php } ?>
+
 <div class="mob-menu">
+
 	<div class="close">
 		<i class="icon-close"></i>
 	</div>
-	<div class="main-navigation">
-		<ul class="clearfix">
-			<li class="active">
-				<a href="#">
-					Home
-				</a>
-			</li>
-			<li class="has-sub-menu">
-				<a href="#">
-					Shop
-				</a>
-				<div class="mega-menu clearfix">
-					<div class="mega-sec">
-						<h2>Electronics</h2>
-						<ul class="mega-sub-menu">
-							<li>
-								<a href="">
-									Example 1
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 2
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 3
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 4
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 5
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 6
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="mega-sec">
-						<h2>Accesories</h2>
-						<ul class="mega-sub-menu">
-							<li>
-								<a href="">
-									Example 1
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 2
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 3
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 4
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 5
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 6
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="mega-sec">
-						<h2>Gadgets</h2>
-						<ul class="mega-sub-menu">
-							<li>
-								<a href="">
-									Example 1
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 2
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 3
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 4
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 5
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 6
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="mega-sec">
-						<h2>Food</h2>
-						<ul class="mega-sub-menu">
-							<li>
-								<a href="">
-									Example 1
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 2
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 3
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 4
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 5
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 6
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="mega-sec">
-						<h2>Accesories</h2>
-						<ul class="mega-sub-menu">
-							<li>
-								<a href="">
-									Example 1
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 2
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 3
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 4
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 5
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Example 6
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</li>
-			<li>
-				<a href="#">
-					About Us
-				</a>
-			</li>
-			<li class="has-sub-menu">
-				<a href="#">
-					Blog Page
-				</a>
-				<ul class="sub-menu">
-					<li>
-						<a href="">
-							Blog single page
-						</a>
-					</li>
-					<li>
-						<a href="">
-							Blog grid
-						</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a href="#">
-					Contact Us
-				</a>
-			</li>
-		</ul>
-	</div>
+
+	<?php
+	wp_nav_menu(
+		array(
+			'container'       => 'div',
+			'container_class' => 'main-navigation',
+			'menu_class'      => 'clearfix',
+			'fallback_cb'     => 'galaxy_store_nav_menu_fallback',
+			'theme_location'  => 'primary',
+		)
+	);
+	?>
+
 </div>
+
+
 <div class="cat-overlay"></div>
 
 <?php wp_footer(); ?>

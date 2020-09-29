@@ -13,14 +13,27 @@
  */
 function galaxy_store_body_classes( $classes ) {
 
+	$galaxy_store_layout_type = 'archives_layout';
+
+	if ( is_single() ) {
+		$galaxy_store_layout_type = 'posts_layout';
+	}
+
+	if ( is_page() ) {
+		$galaxy_store_layout_type = 'pages_layout';
+	}
+
 	// Adds a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
 	}
 
 	// Adds a class of no-sidebar when there is no sidebar present.
-	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
+	// Else use key as body class.
+	if ( ! is_active_sidebar( 'sidebar-1' ) || 'no-sidebar' === galaxy_store_get_theme_mod( $galaxy_store_layout_type, 'right-sidebar' ) ) {
 		$classes[] = 'no-sidebar';
+	} else {
+		$classes[] = galaxy_store_get_theme_mod( $galaxy_store_layout_type, 'right-sidebar' );
 	}
 
 	$classes[] = galaxy_store_get_theme_mod( 'site_layout', 'boxed' );

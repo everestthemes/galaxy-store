@@ -21,6 +21,14 @@ get_header();
 	<div class="blog-posts grid-list">
 		<div class="container">
 			<div class="row">
+
+
+				<?php
+				if ( 'left-sidebar' === galaxy_store_get_theme_mod( 'archives_layout', 'left-sidebar' ) ) {
+					get_sidebar();
+				}
+				?>
+
 				<div class="col-xl-8">
 					<div class="row">
 
@@ -38,7 +46,11 @@ get_header();
 
 				</div>
 
-				<?php get_sidebar(); ?>
+				<?php
+				if ( 'right-sidebar' === galaxy_store_get_theme_mod( 'archives_layout', 'right-sidebar' ) ) {
+					get_sidebar();
+				}
+				?>
 
 			</div>
 		</div>
