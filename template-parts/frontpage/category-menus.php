@@ -119,7 +119,6 @@ if ( empty( $data['product_categories'] ) ) {
 													</div>
 
 													<div class="addcart">
-														<i class="icon-bag"></i>
 														<?php woocommerce_template_loop_add_to_cart(); ?>
 													</div>
 

@@ -7,6 +7,13 @@
  * @package Galaxy_Store
  */
 
+/**
+ * Exit if accessed directly.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! defined( 'GALAXY_STORE_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
 	define( 'GALAXY_STORE_VERSION', '1.0.0' );
@@ -388,7 +395,17 @@ function galaxy_store_scripts() {
 	wp_enqueue_script( 'galaxy-store-owl-carousel', get_template_directory_uri() . '/js/owl.carousel.min.js', array(), '2.3.4', true );
 	wp_enqueue_script( 'galaxy-store-jquery-plugin', get_template_directory_uri() . '/js/jquery.plugin.js', array(), GALAXY_STORE_VERSION, true );
 	wp_enqueue_script( 'galaxy-store-jquery-countdown', get_template_directory_uri() . '/js/jquery.countdown.js', array(), GALAXY_STORE_VERSION, true );
-	wp_enqueue_script( 'galaxy-store-main', get_template_directory_uri() . '/js/main.js', array(), GALAXY_STORE_VERSION, true );
+	wp_register_script( 'galaxy-store-main', get_template_directory_uri() . '/js/main.js', array(), GALAXY_STORE_VERSION, true );
+
+	wp_localize_script(
+		'galaxy-store-main',
+		'galaxy_store',
+		array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		)
+	);
+
+	wp_enqueue_script( 'galaxy-store-main' );
 
 	wp_enqueue_script( 'galaxy-store-navigation', get_template_directory_uri() . '/js/navigation.js', array(), GALAXY_STORE_VERSION, true );
 

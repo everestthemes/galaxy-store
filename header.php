@@ -97,25 +97,50 @@ $special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title' );
 					</div>
 
 					<div class="first-search-input-wrap clearfix">
-						<div class="category-toggle-button">
-							<i class="icon-menu"></i>
-						</div>
+
+						<?php if ( has_nav_menu( 'special-menu' ) ) { ?>
+							<div class="category-toggle-button">
+								<i class="icon-menu"></i>
+							</div>
+						<?php } ?>
 
 						<?php if ( $misc_options_enable_search_form ) { ?>
-							<form class="form-field">
+							<form id="galaxy-store-header-search" method="GET" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="form-field">
 								<div class="searchelememts">
-									<input type="text" name="" placeholder="Search for product">
-									<select class="cat-search">
-										<option value="volvo">All category</option>
-										<option value="volvo">Category 1</option>
-										<option value="saab">Category 2</option>
-										<option value="mercedes">Category 3</option>
-										<option value="audi">Category 4</option>
-									</select>
+									<input type="text" id="header-search-keyword" value="<?php the_search_query(); ?>" name="s" placeholder="<?php esc_attr_e( 'Search for product', 'galaxy-store' ); ?>">
+
+									<?php
+									$galaxy_store_product_categories = get_terms(
+										array(
+											'taxonomy' => 'product_cat',
+										)
+									);
+
+									if ( $galaxy_store_product_categories && ! is_wp_error( $galaxy_store_product_categories ) ) {
+										?>
+										<select id="header-search-product-category" name="category_name" class="cat-search">
+											<option value=""><?php esc_html_e( 'All Categories', 'galaxy-store' ); ?></option>
+										<?php
+										if ( is_array( $galaxy_store_product_categories ) && ! empty( $galaxy_store_product_categories ) ) {
+											foreach ( $galaxy_store_product_categories as $galaxy_store_product_category ) {
+												?>
+												<option value="<?php echo esc_attr( $galaxy_store_product_category->slug ); ?>">
+													<?php echo esc_html( $galaxy_store_product_category->name ); ?>
+												</option>
+												<?php
+											}
+										}
+										?>
+										</select>
+										<?php
+									}
+									?>
 								</div>
+
 								<div class="searchicon">
-									<i class="icon-magnifier"></i>
+									<button type="submit"><i class="icon-magnifier"></i></button>
 								</div>
+
 							</form>
 						<?php } ?>
 					</div>
