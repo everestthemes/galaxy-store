@@ -401,7 +401,8 @@ function galaxy_store_scripts() {
 		'galaxy-store-main',
 		'galaxy_store',
 		array(
-			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'ajaxurl'  => admin_url( 'admin-ajax.php' ),
+			'notFound' => esc_html__( 'No item found.', 'galaxy-store' ),
 		)
 	);
 
@@ -495,6 +496,8 @@ require get_template_directory() . '/inc/widgets/class-galaxy-store-clients-widg
 require get_template_directory() . '/inc/widgets/class-galaxy-store-category-menus-widget.php';
 
 
+
+require get_template_directory() . '/inc/ajax.php';
 
 
 

@@ -135,6 +135,8 @@ $special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title' );
 										<?php
 									}
 									?>
+
+									<ul id="search-results"></ul>
 								</div>
 
 								<div class="searchicon">
