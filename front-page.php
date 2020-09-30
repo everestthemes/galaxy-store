@@ -17,7 +17,7 @@ get_header();
 while ( have_posts() ) {
 	the_post();
 	?>
-		<main id="primary" class="content">
+		<main id="content" class="content">
 			<?php
 
 			dynamic_sidebar( 'frontpage-widgets' );
