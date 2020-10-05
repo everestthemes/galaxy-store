@@ -2093,12 +2093,13 @@ aside css
 	opacity: 1;
 	visibility: visible;
 }
-.lay-prod-wrap .img-holder .prod-hover div.icon-holder {
+.lay-prod-wrap .img-holder .prod-hover ul li {
 	display: inline-block;
 	vertical-align: middle;
 	margin: 0 3px;
+	flex: none !important;
 }
-.lay-prod-wrap .img-holder .prod-hover div.icon-holder a {
+.lay-prod-wrap .img-holder .prod-hover ul li a {
 	background: #f77426;
     height: 35px;
     width: 35px;
@@ -2108,8 +2109,9 @@ aside css
     color: #fff;
     border-radius: 3px;
     -webkit-border-radius: 3px;
+    padding: 0;
 }
-.lay-prod-wrap .img-holder .prod-hover div.icon-holder a:hover {
+.lay-prod-wrap .img-holder .prod-hover ul li a:hover {
 	margin-top: -5px;
 }
 .lay-prod-wrap .prod-info {
@@ -2155,7 +2157,6 @@ woocommerce css
 }
 
 .woocommerce-page ul.products li.product,
-.woocommerce ul.products li,
 .woocommerce ul.products li.product {
 	position: relative;
 	float: none;
@@ -2194,7 +2195,6 @@ woocommerce css
 }
 
 .woocommerce-page .columns-4 ul.products li.product,
-.woocommerce.columns-4 ul.products li,
 .woocommerce.columns-4 ul.products li.product,
 .woocommerce ul.products.columns-4 li.product {
 	-webkit-box-flex: 0;
