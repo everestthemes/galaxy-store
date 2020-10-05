@@ -52,9 +52,11 @@ jQuery(document).ready(function ($) {
 
     /*cat toggle js*/
 
-    /*$(".category-header").click(function () {
+    $(".single .category-header").click(function () {
         $(".header .category-nav").fadeToggle("fast", "linear");
-    });*/
+    });
+
+
 
 
     /*main banner*/

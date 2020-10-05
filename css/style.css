@@ -289,7 +289,6 @@ button {
 	position: relative;
 	float: left;
 	border-radius: 5px 5px 0 0;
-	box-shadow: -1px 1px 10px #ccc;
 }
 .main-header .secondrow .category-section .category-nav,
 .category-section .category-nav {
@@ -298,6 +297,12 @@ button {
 	background: #fff;
 	z-index: 999;
 	width: 100%;
+    box-shadow: 0 0 3px #f0f0f0;
+    -webkit-box-shadow: 0 0 3px #f0f0f0;
+}
+.single .main-header .secondrow .category-section .category-nav,
+.single .category-section .category-nav {
+	display: none;
 }
 .category-section .category-nav {
 	position: static;
@@ -383,6 +388,8 @@ button {
 	opacity: 1;
 	visibility: visible;
 	z-index: 99;
+	box-shadow: 0 0 2px #f0f0f0;
+	-webkit-box-shadow: 0 0 2px #f0f0f0;
 }
 .main-header .secondrow .main-navigation ul ul ul {
 	left: 100%;
@@ -429,10 +436,10 @@ button {
 	font-size: 14px;
     margin-bottom: 0;
     font-weight: 400;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #f0f0f0;
 }
-.main-header .secondrow .main-navigation ul li:last-of-type a {
-	border-bottom: none;
+.main-header .secondrow .main-navigation ul > li:last-of-type a {
+	border-bottom: 0;
 }
 .main-header .secondrow .main-navigation ul li ul.sub-menu li.menu-item-has-children:before {
 	content: "\e606";
@@ -629,7 +636,7 @@ main banner css layout-1
 ============================================================================================================================*/
 .main-banner.layout-1 {
 	background: url(../images/banner-1.jpg);
-    border-top: 1px solid #f3f3f3;
+    /*border-top: 1px solid #f3f3f3;*/
     padding: 70px 0;
     background-size: cover;
     background-repeat: no-repeat; 
