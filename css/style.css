@@ -301,7 +301,11 @@ button {
     -webkit-box-shadow: 0 0 3px #f0f0f0;
 }
 .single .main-header .secondrow .category-section .category-nav,
-.single .category-section .category-nav {
+.single .category-section .category-nav
+.archive .main-header .secondrow .category-section .category-nav,
+.archive .category-section .category-nav
+.search .main-header .secondrow .category-section .category-nav,
+.search .category-section .category-nav {
 	display: none;
 }
 .category-section .category-nav {

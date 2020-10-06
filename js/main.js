@@ -52,7 +52,7 @@ jQuery(document).ready(function ($) {
 
     /*cat toggle js*/
 
-    $(".single .category-header").click(function () {
+    $(".single .category-header, .archive .category-header, .search .category-header").click(function () {
         $(".header .category-nav").fadeToggle("fast", "linear");
     });
 

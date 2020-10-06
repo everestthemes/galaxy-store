@@ -125,7 +125,7 @@ if ( ! function_exists( 'galaxy_store_woocommerce_wrapper_before' ) ) {
 	function galaxy_store_woocommerce_wrapper_before() {
 		?>
 		<div class="page-content">
-			<div class="container">
+			<div class="container clearfix">
 			<main id="primary" class="site-main">
 		<?php
 	}
@@ -143,6 +143,11 @@ if ( ! function_exists( 'galaxy_store_woocommerce_wrapper_after' ) ) {
 	function galaxy_store_woocommerce_wrapper_after() {
 		?>
 			</main><!-- #main -->
+
+			<aside id="secondary" class="widget-area">
+				<?php dynamic_sidebar( 'sidebar-1' ); ?>
+			</aside>
+
 			</div>
 		</div>
 		<?php
