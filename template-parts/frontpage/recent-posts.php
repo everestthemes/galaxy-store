@@ -87,9 +87,7 @@ $the_query = new WP_Query( $args );
 
 							<?php if ( empty( $data['hide_category_name'] ) ) { ?>
 								<div class="cat-tags">
-									<ul>
-										<?php wp_list_categories(); ?>
-									</ul>
+									<?php the_category(); ?>
 								</div>
 							<?php } ?>
 

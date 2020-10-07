@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for displaying page content in page.php
  *
@@ -7,179 +8,75 @@
  * @package Galaxy_Store
  */
 
+/**
+ * Exit if accessed directly.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
+$galaxy_store_author_id         = get_the_author_meta( 'ID' );
+$galaxy_store_author_avatar_url = get_avatar_url( $galaxy_store_author_id, array( 'size' => 150 ) );
+
 ?>
+<div class="single-blog-post single-blog">
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<?php if ( has_post_thumbnail() ) { ?>
+		<div class="blog-media">
+			<img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title_attribute(); ?>">
+		</div>
+	<?php } ?>
 
-	<?php galaxy_store_post_thumbnail(); ?>
+	<div class="blog-content">
 
-	<div class="entry-content">
+		<div class="user-section">
+
+			<?php if ( $galaxy_store_author_avatar_url ) { ?>
+				<div class="user-img">
+					<img src="<?php echo esc_url( $galaxy_store_author_avatar_url ); ?>">
+				</div>
+			<?php } ?>
+
+			<?php if ( get_the_date() || get_the_author() ) { ?>
+				<ul class="blog-page-meta">
+					<?php
+					if ( get_the_author() ) {
+						?>
+						<li class="author">
+							<a href="<?php echo esc_url( get_author_posts_url( $galaxy_store_author_id ) ); ?>"><?php the_author(); ?></a>
+						</li>
+						<?php
+					}
+
+					if ( get_the_date() ) {
+						?>
+						<li class="date">
+							<i class="icon-calendar"></i> <?php echo esc_html( get_the_date() ); ?>
+						</li>
+						<?php
+					}
+					?>
+				</ul>
+			<?php } ?>
+
+		</div>
+
+		<?php if ( has_category() ) { ?>
+			<div class="cat-tags">
+				<?php the_category(); ?>
+			</div>
+		<?php } ?>
+
 		<?php
+		the_title( '<h4 class="blog-title">', '</h4>' );
+
 		the_content();
 
 		if ( ! galaxy_store_is_woocommerce_page() ) {
-			wp_link_pages(
-				array(
-					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'galaxy-store' ),
-					'after'  => '</div>',
-				)
-			);
+			wp_link_pages();
 		}
 		?>
-	</div><!-- .entry-content -->
 
-	<?php if ( get_edit_post_link() ) : ?>
-		<footer class="entry-footer">
-			<?php
-			edit_post_link(
-				sprintf(
-					wp_kses(
-						/* translators: %s: Name of current post. Only visible to screen readers */
-						__( 'Edit <span class="screen-reader-text">%s</span>', 'galaxy-store' ),
-						array(
-							'span' => array(
-								'class' => array(),
-							),
-						)
-					),
-					wp_kses_post( get_the_title() )
-				),
-				'<span class="edit-link">',
-				'</span>'
-			);
-			?>
-		</footer><!-- .entry-footer -->
-	<?php endif; ?>
-
-</article><!-- #post-<?php the_ID(); ?> -->
-
-<?php
-the_post_navigation();
-
-?>
-<div id="primary">
-	<div class="single-blog-post single-blog">
-		<div class="blog-media">
-			<?php the_post_thumbnail( 'full' ); ?>
-		</div>
-		<div class="blog-content">
-
-			<div class="user-section">
-				<div class="user-img">
-					<img src="images/human-2.jpg" alt="image">
-				</div>
-				<ul class="blog-page-meta">
-					<li class="author">
-						<a href="#">
-							Admin
-						</a>
-					</li>
-					<li class="date">
-						<a href="#">
-							<i class="icon-calendar"></i> 24 April, 2020
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<div class="cat-tags">
-				<ul>
-					<li>
-						<a href="#">Fashion</a>
-					</li>
-					<li>
-						<a href="#">Blog</a>
-					</li>
-					<li>
-						<a href="#">Food</a>
-					</li>
-					<li>
-						<a href="#">Doctor</a>
-					</li>
-				</ul>
-			</div>
-			<h4 class="blog-title">
-				<a href="#">Country road</a>
-			</h4>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum eius expedita hic, vel minima minus reiciendis consequuntur ab beatae necessitatibus amet magni itaque, nostrum vero eos
-				nobis modi temporibus recusandae.
-			</p>
-			<p>
-				Mauris eu molestie dui. Phasellus quis orci nec elit consequat placerat quis quis libero. Phasellus euismod consequat orci a venenatis. Mauris eget tortor nec velit eleifend ultrices a sit amet sem. Proin suscipit sagittis consectetur.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum eius expedita hic, vel minima minus reiciendis consequuntur ab beatae necessitatibus amet magni itaque, nostrum vero eos
-				nobis modi temporibus recusandae.
-			</p>
-
-			<ul class="wp-block-gallery">
-				<li class="blocks-gallery-item">
-					<figure>
-						<img src="images/fas123.jpg" align="img">
-					</figure>
-				</li>
-				<li class="blocks-gallery-item">
-					<figure>
-						<img src="images/fas124.jpg" align="img">
-					</figure>
-				</li>
-				<li class="blocks-gallery-item">
-					<figure>
-						<img src="images/fas125.jpg" align="img">
-					</figure>
-				</li>
-			</ul>
-
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum eius expedita hic, vel minima minus reiciendis consequuntur ab beatae necessitatibus amet magni itaque, nostrum vero eos
-				nobis modi temporibus recusandae.
-			</p>
-
-			<blockquote class="wp-block-quote">
-				<p>
-					Mauris eu molestie dui. Phasellus quis orci nec elit consequat placerat quis quis libero.
-				</p>
-				<cite>Demo team</cite>
-			</blockquote>
-
-			<p>
-				Mauris eu molestie dui. Phasellus quis orci nec elit consequat placerat quis quis libero. Phasellus euismod consequat orci a venenatis. Mauris eget tortor nec velit eleifend ultrices a sit amet sem. Proin suscipit sagittis consectetur.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum eius expedita hic, vel minima minus reiciendis consequuntur ab beatae necessitatibus amet magni itaque, nostrum vero eos
-				nobis modi temporibus recusandae.
-			</p>
-
-			<h3>EXAMPLE HEADING</h3>
-
-			<p>
-				Mauris eu molestie dui. Phasellus quis orci nec elit consequat placerat quis quis libero. Phasellus euismod consequat orci a venenatis. Mauris eget tortor nec velit eleifend ultrices a sit amet sem. Proin suscipit sagittis consectetur.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum eius expedita hic, vel minima minus reiciendis consequuntur ab beatae necessitatibus amet magni itaque, nostrum vero eos
-				nobis modi temporibus recusandae.
-			</p>
-		</div>
 	</div>
-
-	<div class="post-navigation">
-		<div class="nav-links">
-			<div class="nav-previous">
-				<span>Prev post</span>
-				<a href="#">70% Discount Approaching On All Kitchen Items</a>
-			</div>
-			<div class="nav-next">
-				<span>Next post</span>
-				<a href="#">Converse Lovers Will Love These New Arrivals</a>
-			</div>
-		</div>
-	</div>
-
-	<div id="comments" class="comments-area">
-		<div id="respond" class="comment-respond">
-			<h3>Leave a Reply</h3>
-		</div>
-	</div>
-
 </div>

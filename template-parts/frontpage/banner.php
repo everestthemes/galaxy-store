@@ -50,7 +50,7 @@ $the_query = new WP_Query( $args );
 
 							<?php if ( get_the_excerpt() ) { ?>
 								<p class="sub-title">
-									<?php echo wp_kses_post( get_the_excerpt() ); ?>
+									<?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), '15', '...' ) ); ?>
 								</p>
 							<?php } ?>
 

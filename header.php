@@ -14,7 +14,8 @@ $misc_options_enable_search_form = galaxy_store_get_theme_mod( 'misc_options_ena
 $misc_options_enable_wishlist    = galaxy_store_get_theme_mod( 'misc_options_enable_wishlist', true );
 $misc_options_enable_mini_cart   = galaxy_store_get_theme_mod( 'misc_options_enable_mini_cart', true );
 
-$special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title' );
+$special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title', __( 'All Departments', 'galaxy-store' ) );
+$special_menu_title = $special_menu_title ? $special_menu_title : __( 'All Departments', 'galaxy-store' );
 
 ?>
 <!doctype html>
@@ -82,11 +83,9 @@ $special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title' );
 							</div>
 						<?php } ?>
 
-						<?php if ( $misc_options_enable_mini_cart ) { ?>
+						<?php if ( $misc_options_enable_mini_cart && function_exists( 'galaxy_store_woocommerce_header_cart' ) ) { ?>
 							<div>
-								<a href="">
-									<i class="icon-bag"></i>
-								</a>
+								<?php galaxy_store_woocommerce_header_cart(); ?>
 							</div>
 						<?php } ?>
 
@@ -154,11 +153,9 @@ $special_menu_title = galaxy_store_get_theme_mod( 'special_menu_title' );
 					<?php if ( has_nav_menu( 'special-menu' ) ) { ?>
 						<div class="category-section">
 
-							<?php if ( $special_menu_title ) { ?>
-								<div class="category-header">
-									<?php echo esc_html( $special_menu_title ); ?>
-								</div>
-							<?php } ?>
+							<div class="category-header">
+								<?php echo esc_html( $special_menu_title ); ?>
+							</div>
 
 							<?php
 							wp_nav_menu(
