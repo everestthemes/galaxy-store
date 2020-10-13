@@ -142,7 +142,7 @@ if ( ! function_exists( 'galaxy_store_woocommerce_wrapper_after' ) ) {
 	 */
 	function galaxy_store_woocommerce_wrapper_after() {
 		?>
-			</main><!-- #main -->
+			</main><!-- #primary -->
 
 			<?php get_sidebar(); ?>
 

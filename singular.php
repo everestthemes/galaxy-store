@@ -36,12 +36,14 @@ $galaxy_store_layout_type = is_single() ? 'posts_layout' : 'pages_layout';
 					get_template_part( 'template-parts/content', 'singular' );
 				}
 
-				the_post_navigation(
-					array(
-						'prev_text' => '<span>' . __( 'Prev Post', 'galaxy-store' ) . '</span> %title',
-						'next_text' => '<span>' . __( 'Next Post', 'galaxy-store' ) . '</span> %title',
-					)
-				);
+				if ( ! galaxy_store_is_woocommerce_page() ) {
+					the_post_navigation(
+						array(
+							'prev_text' => '<span>' . __( 'Prev Post', 'galaxy-store' ) . '</span> %title',
+							'next_text' => '<span>' . __( 'Next Post', 'galaxy-store' ) . '</span> %title',
+						)
+					);
+				}
 
 				if ( comments_open() || get_comments_number() ) :
 					comments_template();

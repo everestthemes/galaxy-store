@@ -32,7 +32,7 @@ $galaxy_store_author_avatar_url = get_avatar_url( $galaxy_store_author_id, array
 
 		<div class="user-section">
 
-			<?php if ( $galaxy_store_author_avatar_url ) { ?>
+			<?php if ( $galaxy_store_author_avatar_url && ! galaxy_store_is_woocommerce_page() ) { ?>
 				<div class="user-img">
 					<img src="<?php echo esc_url( $galaxy_store_author_avatar_url ); ?>">
 				</div>
@@ -41,7 +41,7 @@ $galaxy_store_author_avatar_url = get_avatar_url( $galaxy_store_author_id, array
 			<?php if ( get_the_date() || get_the_author() ) { ?>
 				<ul class="blog-page-meta">
 					<?php
-					if ( get_the_author() ) {
+					if ( get_the_author() && ! galaxy_store_is_woocommerce_page() ) {
 						?>
 						<li class="author">
 							<a href="<?php echo esc_url( get_author_posts_url( $galaxy_store_author_id ) ); ?>"><?php the_author(); ?></a>

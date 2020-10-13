@@ -13,6 +13,10 @@
  */
 function galaxy_store_body_classes( $classes ) {
 
+	if ( ! is_front_page() ) {
+		$classes[] = 'toggle-cat-nav';
+	}
+
 	$galaxy_store_layout_type = 'archives_layout';
 
 	if ( is_single() ) {
