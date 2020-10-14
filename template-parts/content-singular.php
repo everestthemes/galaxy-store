@@ -30,37 +30,39 @@ $galaxy_store_author_avatar_url = get_avatar_url( $galaxy_store_author_id, array
 
 	<div class="blog-content">
 
-		<div class="user-section">
+		<?php if ( ! galaxy_store_is_woocommerce_page() ) { ?>
+			<div class="user-section">
 
-			<?php if ( $galaxy_store_author_avatar_url && ! galaxy_store_is_woocommerce_page() ) { ?>
-				<div class="user-img">
-					<img src="<?php echo esc_url( $galaxy_store_author_avatar_url ); ?>">
-				</div>
-			<?php } ?>
+				<?php if ( $galaxy_store_author_avatar_url ) { ?>
+					<div class="user-img">
+						<img src="<?php echo esc_url( $galaxy_store_author_avatar_url ); ?>">
+					</div>
+				<?php } ?>
 
-			<?php if ( get_the_date() || get_the_author() ) { ?>
-				<ul class="blog-page-meta">
-					<?php
-					if ( get_the_author() && ! galaxy_store_is_woocommerce_page() ) {
-						?>
-						<li class="author">
-							<a href="<?php echo esc_url( get_author_posts_url( $galaxy_store_author_id ) ); ?>"><?php the_author(); ?></a>
-						</li>
+				<?php if ( get_the_date() || get_the_author() ) { ?>
+					<ul class="blog-page-meta">
 						<?php
-					}
+						if ( get_the_author() ) {
+							?>
+							<li class="author">
+								<a href="<?php echo esc_url( get_author_posts_url( $galaxy_store_author_id ) ); ?>"><?php the_author(); ?></a>
+							</li>
+							<?php
+						}
 
-					if ( get_the_date() ) {
+						if ( get_the_date() ) {
+							?>
+							<li class="date">
+								<i class="icon-calendar"></i> <?php echo esc_html( get_the_date() ); ?>
+							</li>
+							<?php
+						}
 						?>
-						<li class="date">
-							<i class="icon-calendar"></i> <?php echo esc_html( get_the_date() ); ?>
-						</li>
-						<?php
-					}
-					?>
-				</ul>
-			<?php } ?>
+					</ul>
+				<?php } ?>
 
-		</div>
+			</div>
+		<?php } ?>
 
 		<?php if ( has_category() ) { ?>
 			<div class="cat-tags">
