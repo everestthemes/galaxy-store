@@ -8,44 +8,62 @@
  */
 
 get_header();
+
+$galaxy_store_layout_type = is_single() ? 'posts_layout' : 'pages_layout';
+
 ?>
 
 <main class="content">
+
 	<?php galaxy_store_get_breadcrumb(); ?>
 
-	<div class="galaxy-store-single">
-		<div class="container">
-			<div class="row">
+	<div class="page-content">
+		<div class="container clearfix">
 
-				<div class="col-xl-8">
-					<div class="row">
+			<?php
+			if ( 'left-sidebar' === galaxy_store_get_theme_mod( $galaxy_store_layout_type, 'left-sidebar' ) ) {
+				! galaxy_store_is_woocommerce_page() ? get_sidebar() : null;
+			}
+			?>
 
-						<?php
-						while ( have_posts() ) {
-							the_post();
+			<div id="primary">
 
-							get_template_part( 'template-parts/content', 'singular' );
+				<?php
 
+				while ( have_posts() ) {
+					the_post();
 
-							// If comments are open or we have at least one comment, load up the comment template.
-							if ( comments_open() || get_comments_number() ) :
-								comments_template();
-							endif;
+					get_template_part( 'template-parts/content', 'singular' );
+				}
 
-						}
-						?>
+				if ( ! galaxy_store_is_woocommerce_page() ) {
+					the_post_navigation(
+						array(
+							'prev_text' => '<span>' . __( 'Prev Post', 'galaxy-store' ) . '</span> %title',
+							'next_text' => '<span>' . __( 'Next Post', 'galaxy-store' ) . '</span> %title',
+						)
+					);
+				}
 
-					</div>
-
-				</div>
-
-				<?php get_sidebar(); ?>
+				if ( comments_open() || get_comments_number() ) :
+					comments_template();
+				endif;
+				?>
 
 			</div>
+
+			<?php
+			if ( 'right-sidebar' === galaxy_store_get_theme_mod( $galaxy_store_layout_type, 'right-sidebar' ) ) {
+				! galaxy_store_is_woocommerce_page() ? get_sidebar() : null;
+			}
+			?>
+
 		</div>
 	</div>
 
 </main>
+
+
 
 <?php
 get_footer();

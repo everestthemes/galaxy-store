@@ -31,7 +31,7 @@ if ( empty( $data['product_categories'] ) ) {
 			</div>
 		<?php } ?>
 
-		<div class="tab-wrapper">
+		<div class="tab-wrapper layout-1">
 
 			<div class="tab-nav">
 				<ul>
@@ -119,7 +119,6 @@ if ( empty( $data['product_categories'] ) ) {
 													</div>
 
 													<div class="addcart">
-														<i class="icon-bag"></i>
 														<?php woocommerce_template_loop_add_to_cart(); ?>
 													</div>
 

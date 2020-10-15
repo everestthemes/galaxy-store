@@ -7,6 +7,13 @@
  * @package Galaxy_Store
  */
 
+/**
+ * Exit if accessed directly.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! defined( 'GALAXY_STORE_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
 	define( 'GALAXY_STORE_VERSION', '1.0.0' );
@@ -377,8 +384,8 @@ function galaxy_store_scripts() {
 	wp_enqueue_style( 'galaxy-store-nice-select', get_template_directory_uri() . '/css/nice-select.css', array(), '1.0.0' );
 	wp_enqueue_style( 'galaxy-store-owl-carousel', get_template_directory_uri() . '/css/owl.carousel.min.css', array(), '2.3.4' );
 	wp_enqueue_style( 'galaxy-store-animate', get_template_directory_uri() . '/css/animate.css', array(), '1.0.0' );
-	wp_enqueue_style( 'galaxy-store-main-style', get_template_directory_uri() . '/css/style.css', array(), GALAXY_STORE_VERSION );
-	wp_enqueue_style( 'galaxy-store-responsive', get_template_directory_uri() . '/css/responsive.css', array(), GALAXY_STORE_VERSION );
+	wp_enqueue_style( 'galaxy-store-main-style', get_template_directory_uri() . '/css/style.css', array( 'galaxy-store-woocommerce-style' ), GALAXY_STORE_VERSION );
+	wp_enqueue_style( 'galaxy-store-responsive', get_template_directory_uri() . '/css/responsive.css', array( 'galaxy-store-woocommerce-style' ), GALAXY_STORE_VERSION );
 
 	wp_enqueue_style( 'galaxy-store-style', get_stylesheet_uri(), array(), GALAXY_STORE_VERSION );
 	wp_style_add_data( 'galaxy-store-style', 'rtl', 'replace' );
@@ -388,7 +395,18 @@ function galaxy_store_scripts() {
 	wp_enqueue_script( 'galaxy-store-owl-carousel', get_template_directory_uri() . '/js/owl.carousel.min.js', array(), '2.3.4', true );
 	wp_enqueue_script( 'galaxy-store-jquery-plugin', get_template_directory_uri() . '/js/jquery.plugin.js', array(), GALAXY_STORE_VERSION, true );
 	wp_enqueue_script( 'galaxy-store-jquery-countdown', get_template_directory_uri() . '/js/jquery.countdown.js', array(), GALAXY_STORE_VERSION, true );
-	wp_enqueue_script( 'galaxy-store-main', get_template_directory_uri() . '/js/main.js', array(), GALAXY_STORE_VERSION, true );
+	wp_register_script( 'galaxy-store-main', get_template_directory_uri() . '/js/main.js', array(), GALAXY_STORE_VERSION, true );
+
+	wp_localize_script(
+		'galaxy-store-main',
+		'galaxy_store',
+		array(
+			'ajaxurl'  => admin_url( 'admin-ajax.php' ),
+			'notFound' => esc_html__( 'No item found.', 'galaxy-store' ),
+		)
+	);
+
+	wp_enqueue_script( 'galaxy-store-main' );
 
 	wp_enqueue_script( 'galaxy-store-navigation', get_template_directory_uri() . '/js/navigation.js', array(), GALAXY_STORE_VERSION, true );
 
@@ -412,6 +430,12 @@ if ( ! function_exists( 'galaxy_store_admin_scripts' ) ) {
 	add_action( 'admin_enqueue_scripts', 'galaxy_store_admin_scripts' );
 }
 
+/**
+ * Returns true if current page relates to woocommerce by any means.
+ */
+function galaxy_store_is_woocommerce_page() {
+	return is_woocommerce() || is_cart() || is_checkout() || is_account_page();
+}
 
 /**
  * Implement the Custom Header feature.
@@ -472,6 +496,8 @@ require get_template_directory() . '/inc/widgets/class-galaxy-store-clients-widg
 require get_template_directory() . '/inc/widgets/class-galaxy-store-category-menus-widget.php';
 
 
+
+require get_template_directory() . '/inc/ajax.php';
 
 
 

@@ -18,6 +18,12 @@ get_header();
 		<div class="container">
 			<div class="row">
 
+				<?php
+				if ( 'left-sidebar' === galaxy_store_get_theme_mod( 'archives_layout', 'left-sidebar' ) ) {
+					get_sidebar();
+				}
+				?>
+
 				<?php if ( have_posts() ) { ?>
 					<div class="col-xl-8">
 						<div class="row">
@@ -25,7 +31,6 @@ get_header();
 							<?php
 							while ( have_posts() ) {
 								the_post();
-
 								get_template_part( 'template-parts/content' );
 							}
 							?>
@@ -41,7 +46,11 @@ get_header();
 				}
 				?>
 
-				<?php get_sidebar(); ?>
+				<?php
+				if ( 'right-sidebar' === galaxy_store_get_theme_mod( 'archives_layout', 'right-sidebar' ) ) {
+					get_sidebar();
+				}
+				?>
 
 			</div>
 		</div>
