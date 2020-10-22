@@ -7,5 +7,5 @@
 
 	?>
 	<a href="" title="<?php esc_attr_e( 'Quick View', 'galaxy-store' ); ?>" class="addonify-qvm-button button" data-product_id="<?php the_ID(); ?>" rel="nofollow" >
-		<i class="icon-magnifier"></i>
+		<i class="icon  icon-search"></i>
 	</a>

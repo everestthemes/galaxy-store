@@ -25,7 +25,7 @@ if ( ! class_exists( 'Galaxy_Store_Featured_Products_Widget' ) ) {
 		 */
 		public function __construct() {
 			$widget_ops = array(
-				'classname'   => 'Galaxy_Store_Featured_Products_Widget',
+				'classname'   => 'Galaxy_Store_Featured_Products_Widget product-featured',
 				'description' => __( 'Featured products listing widget for frontpage section.', 'galaxy-store' ),
 			);
 			parent::__construct( 'Galaxy_Store_Featured_Products_Widget', 'Galaxy Store Featured Products', $widget_ops );

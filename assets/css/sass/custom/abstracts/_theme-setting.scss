@@ -1,0 +1,51 @@
+
+/*=====================================================
+    light theme colors ( as SCSS mixin )
+=====================================================*/
+@mixin theme-light {
+    --body-bg: #f7f8fb;
+    --theme-color: #F77426;
+    --alternate-color: #83b735;
+    --light-bg-color: #f0f2f7;
+    --light-bg-color2: #f2f2f2;
+    --text-color-normal: #424447;
+    --text-color-dark: #06111D;
+    --text-color-light: #a1a1a1;
+    --border-color: #E8E9EB;
+    --alternate-bg: #000000;
+    --alternate-text-dark: #ffffff;
+    --alternate-text-normal: #c2c3c7;
+    --alternate-text-light: #535A63;
+    --footer-border-color: #2A313F;
+    --error: #ed002e;
+    --success: #1c811d;
+    --shadow: #{0 0 40px rgba(0, 0, 0, 0.1)};
+    --footer-bg-color: #f0f2f7;
+    --alternate-nav-bg: #03A9F4;
+    --top-strip-color: #d7d7d7;
+    --banner-dot-color: #a1a1a1;
+    --theme-dark-color: #ed5f0a;
+}
+
+/*=====================================================
+    common variables ( as SCSS mixin ) 
+    define common variable for light and dark here
+=====================================================*/
+@mixin common-vars {
+    --white: #{rgb(255,255,255)};
+    --black: #{rgb(0,0,0)};
+    --transition-speed: 0.25s;
+    --header-logo-height: 50px;
+    --footer-logo-height: 30px;
+}
+/*=====================================================
+    ⚠ WARNING: please do not edit below this line,
+    incorrect coding may break the theme
+
+    Merging common variables with light and dark
+    separately
+=====================================================*/
+:root {
+    @include common-vars;
+    @include theme-light;
+}

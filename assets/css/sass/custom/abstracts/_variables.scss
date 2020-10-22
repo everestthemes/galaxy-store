@@ -1,0 +1,49 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 Theme Color
+2.0 Fonts
+		2.1 Font Size
+		2.2 Font Family
+		2.3 Font Wieght
+3.0 Heading Size
+4.0 Global Window Height & width
+--------------------------------------------------------------*/
+
+/* 1.0 Theme Color*/
+/*$color-secondary   : lighten(saturate(adjust-hue($color-base, 224), 44.93), 1.96); *//* #263764*//**/
+$color-white       : rgb(255,255,255); /* #ffffff*/
+$color-black       : rgb(0,0,0); /* #000000*/
+
+/* 2.0 Fonts*/
+/* 2.1 Font Size*/
+$font-size-base : 14px !default;
+$font-size-xs   : ceil(($font-size-base * 0.71)) !default; /* ~10px*/
+$font-size-sm   : ceil(($font-size-base * 0.82)) !default; /* ~12px*/
+$font-size-md   : ceil(($font-size-base * 1.14)) !default; /* ~16px*/
+$font-size-lg   : ceil(($font-size-base * 1.285)) !default; /* ~18px*/
+	
+/* 2.2 Font Family*/
+$font-lato : 'Lato', sans-serif;
+$font-icon   : 'fontello' !important;
+
+/* 2.3 Font weight*/
+$font-thin       : 100;
+$font-light      : 300;
+$font-normal     : 400;
+$font-semi-bold  : 600;
+$font-bold       : 700;
+$font-ultra-bold : 800;
+
+/* 3.0 Heading Size*/
+$font-size-h1 : floor(($font-size-base * 2.286)) !default; /* ~32px */
+$font-size-h2 : 3rem;
+$font-size-h3 : 2rem;
+$font-size-h4 : 1.5rem;
+$font-size-h5 : 1.2rem;
+$font-size-h6 : 1rem;
+
+/* 4.0 global height & width*/
+$window-height : 100vh;
+$window-width : 100vw;
+

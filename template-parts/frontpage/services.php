@@ -39,40 +39,32 @@ if ( ! empty( $data['category'] ) ) {
 $the_query = new WP_Query( $args );
 
 ?>
-<div class="service-block section_padd60 layout-2">
-	<div class="container">
-		<div class="row">
-
-			<?php
+<div class="container">
+	<div class="row">
+		<?php
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
-				?>
-				<div class="col-lg-4 col-md-6">
-					<div class="service-section">
-						<div class="img-holder umbrella">
-							<?php the_post_thumbnail( array( 150, 150 ) ); ?>
-						</div>
-						<div class="text-holder">
-							<?php
-							the_title(
-								'<h4>',
-								'</h4>'
-							);
+		?>
+		<div class="col-md-4 col-sm-6">
+			<figure class="service__item">
+				<div class="service__item__img"><?php the_post_thumbnail( array( 150, 150 ) ); ?></div>
+				<figcaption>
+					<?php
+						the_title(
+							'<h5>',
+							'</h5>'
+						);
 
-							if ( get_the_content() ) {
-								?>
-								<span><?php echo wp_kses_post( get_the_content() ); ?></span>
-								<?php
-							}
+						if ( get_the_content() ) {
 							?>
-						</div>
-					</div>
-				</div>
-				<?php
-			}
-			?>
-
+							<?php echo wp_kses_post( get_the_content() ); ?>
+							<?php
+						}
+						?>
+				</figcaption>
+			</figure>
 		</div>
+		<?php } ?>
 	</div>
 </div>
 <?php

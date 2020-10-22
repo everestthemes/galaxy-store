@@ -25,7 +25,7 @@ if ( ! class_exists( 'Galaxy_Store_Category_Menus_Widget' ) ) {
 		 */
 		public function __construct() {
 			$widget_ops = array(
-				'classname'   => 'Galaxy_Store_Category_Menus_Widget',
+				'classname'   => 'Galaxy_Store_Category_Menus_Widget product-cat-menu',
 				'description' => __( 'Category menus section widget for frontpage section.', 'galaxy-store' ),
 			);
 			parent::__construct( 'Galaxy_Store_Category_Menus_Widget', 'Galaxy Store Category Menus', $widget_ops );

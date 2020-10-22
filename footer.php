@@ -171,6 +171,7 @@ if ( has_nav_menu( 'special-menu' ) ) {
 
 <div class="cat-overlay"></div>
 
+
 <?php wp_footer(); ?>
 </body>
 

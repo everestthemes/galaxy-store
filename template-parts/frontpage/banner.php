@@ -36,47 +36,48 @@ $args = array(
 $the_query = new WP_Query( $args );
 
 ?>
-<div class="main-banner layout-1" style="<?php echo esc_attr( implode( ' ', $styles ) ); ?>">
+<div class="banner" style="<?php echo esc_attr( implode( ' ', $styles ) ); ?>">
 	<div class="container">
-		<div class="owl-carousel slider-group">
+		<div class="row">
+			<div class="col">
+				<div class="owl-carousel banner__slider">
+					<?php
+						while ( $the_query->have_posts() ) {
+							$the_query->the_post();
+							?>
+							<div class="banner__slider__item flex">
+								<div class="banner__slider__item__cnt">
 
-			<?php
-			while ( $the_query->have_posts() ) {
-				$the_query->the_post();
-				?>
-				<div class="item">
-					<div class="content-holder">
-						<div class="caption-text">
+									<?php the_title( '<h2>', '</h2>' ); ?>
 
-							<?php if ( get_the_excerpt() ) { ?>
-								<p class="sub-title">
-									<?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), '15', '...' ) ); ?>
-								</p>
-							<?php } ?>
+									<?php if ( get_the_excerpt() ) { ?>
+										<p>
+											<?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), '20', '...' ) ); ?>
+										</p>
+										<?php } ?>
 
-							<?php the_title( '<h2>', '</h2>' ); ?>
+									<a href="<?php the_permalink(); ?>" class="btn btn--md btn--theme mt-4">
+										<?php echo isset( $data['button_label'] ) ? esc_html( $data['button_label'] ) : esc_html__( 'View Product', 'galaxy-store' ); ?>
+									</a>
+								</div>
+							
+									<?php if ( has_post_thumbnail() ) { ?>
+										<div class="banner__slider__item__img">
+											<?php the_post_thumbnail(); ?>
+										</div>
+									<?php } ?>
 
-							<a href="<?php the_permalink(); ?>" class="bg-button">
-								<?php echo isset( $data['button_label'] ) ? esc_html( $data['button_label'] ) : esc_html__( 'View Product', 'galaxy-store' ); ?>
-							</a>
+								</div>
+							<?php
+						}
+						?>
 
-						</div>
-
-						<?php if ( has_post_thumbnail() ) { ?>
-							<div class="img-holder">
-								<?php the_post_thumbnail(); ?>
-							</div>
-						<?php } ?>
-
-					</div>
 				</div>
-				<?php
-			}
-			?>
-
+			</div>
 		</div>
 	</div>
 </div>
+
+
 <?php
 wp_reset_postdata();
-

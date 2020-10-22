@@ -25,7 +25,7 @@ if ( ! class_exists( 'Galaxy_Store_Clients_Widget' ) ) {
 		 */
 		public function __construct() {
 			$widget_ops = array(
-				'classname'   => 'Galaxy_Store_Clients_Widget',
+				'classname'   => 'Galaxy_Store_Clients_Widget our-clients',
 				'description' => __( 'Clients section widget for frontpage section.', 'galaxy-store' ),
 			);
 			parent::__construct( 'Galaxy_Store_Clients_Widget', 'Galaxy Store Clients', $widget_ops );

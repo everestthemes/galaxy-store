@@ -25,7 +25,7 @@ if ( ! class_exists( 'Galaxy_Store_Recent_Posts_Widget' ) ) {
 		 */
 		public function __construct() {
 			$widget_ops = array(
-				'classname'   => 'Galaxy_Store_Recent_Posts_Widget',
+				'classname'   => 'Galaxy_Store_Recent_Posts_Widget recent-post',
 				'description' => __( 'Recent posts section widget for frontpage section.', 'galaxy-store' ),
 			);
 			parent::__construct( 'Galaxy_Store_Recent_Posts_Widget', 'Galaxy Store Recent Posts', $widget_ops );

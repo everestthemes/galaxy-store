@@ -1,0 +1,28 @@
+// Fonts ()
+@import 'fonts/fontello.scss';
+// Abstracts (variables, mixins)
+@import 'abstracts/theme-setting.scss';
+@import 'abstracts/variables.scss';
+@import 'abstracts/mixins.scss';
+// Vendor (for third party component)
+// @import 'vendors/some-third-party-component.scss';
+// Base (normalize)
+@import 'base/normalize.scss';
+// Layout (header, navigation)
+@import 'layout/header.scss';
+@import 'layout/navigation.scss';
+@import 'layout/sidebar.scss';
+@import 'layout/banner.scss';
+@import 'layout/footer.scss';
+// Components (buttons, modal)
+@import 'components/buttons.scss';
+@import 'components/modal.scss';
+@import 'components/form.scss';
+@import 'components/drop-down.scss';
+@import 'components/breadcrumbs.scss';
+@import 'components/table.scss';
+@import 'components/tabs.scss';
+// Pages (hub)
+@import 'pages/global.scss';
+// Responsive
+@import 'responsive/breakpoints.scss';

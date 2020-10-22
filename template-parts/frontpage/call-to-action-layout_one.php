@@ -24,23 +24,23 @@ $styles = array(
 );
 
 ?>
-<div class="cta layout-2" style="<?php echo esc_attr( implode( ' ', $styles ) ); ?>">
+<div class="parallax" style="<?php echo esc_attr( implode( ' ', $styles ) ); ?>">
 	<div class="container">
-		<div class="cta-form">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-8">
+				<?php if ( ! empty( $data['layout_one']['title'] ) ) { ?>
+					<?php echo wp_kses_post( "<h3>{$data['layout_one']['title']}</h3>" ); ?>
+				<?php } ?>
 
-			<?php if ( ! empty( $data['layout_one']['title'] ) ) { ?>
-				<?php echo wp_kses_post( "<h3>{$data['layout_one']['title']}</h3>" ); ?>
-			<?php } ?>
+				<?php echo ! empty( $data['layout_one']['description'] ) ? wp_kses_post( wpautop( $data['layout_one']['description'] ) ) : null; ?>
 
-			<?php echo ! empty( $data['layout_one']['description'] ) ? wp_kses_post( wpautop( $data['layout_one']['description'] ) ) : null; ?>
-
-			<a
-				href="<?php echo ! empty( $data['layout_one']['button_link'] ) ? esc_url( $data['layout_one']['button_link'] ) : null; ?>"
-				class="bg-button"
-			>
-				<?php echo ! empty( $data['layout_one']['button_label'] ) ? esc_html( $data['layout_one']['button_label'] ) : null; ?>
-			</a>
-
+				<a
+					href="<?php echo ! empty( $data['layout_one']['button_link'] ) ? esc_url( $data['layout_one']['button_link'] ) : null; ?>"
+					class="bg-button"
+				>
+					<?php echo ! empty( $data['layout_one']['button_label'] ) ? esc_html( $data['layout_one']['button_label'] ) : null; ?>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>

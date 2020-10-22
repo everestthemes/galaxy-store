@@ -18,39 +18,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div class="partners layout-1 section_padd60 section-bg1">
-	<div class="container">
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<header class="frontpage-widget__header flex">
+				<h4>
+					<?php if ( ! empty( $data['title'] ) ) { ?>
+						<span><?php echo esc_html( $data['title'] ); ?></span>
+					<?php } ?>
+				</h4>
+			</header>
 
-		<?php if ( ! empty( $data['title'] ) ) { ?>
-			<div class="section-header">
-				<h2><span><?php echo esc_html( $data['title'] ); ?></span></h2>
-			</div>
-		<?php } ?>
-
-		<?php
-		$logos = ! empty( $data['logos'] ) ? $data['logos'] : '';
-		if ( is_array( $logos ) && ! empty( $logos ) ) {
+			<?php
+				$logos = ! empty( $data['logos'] ) ? $data['logos'] : '';
+				if ( is_array( $logos ) && ! empty( $logos ) ) {
 			?>
-			<ul>
+			<div class="our-clients__cnt flex">
 				<?php
-				foreach ( $logos as $logo ) {
-					$image_uri = ! empty( $logo['image_uri'] ) ? $logo['image_uri'] : '';
+					foreach ( $logos as $logo ) {
+						$image_uri = ! empty( $logo['image_uri'] ) ? $logo['image_uri'] : '';
 					if ( ! $image_uri ) {
 						continue;
 					}
-					?>
-					<li>
-						<a tabindex="-1">
-							<img src="<?php echo esc_url( $image_uri ); ?>">
-						</a>
-					</li>
-					<?php
-				}
 				?>
-			</ul>
-			<?php
-		}
-		?>
-
+				<a class="our-clients__cnt__item" tabindex="-1">
+						<img src="<?php echo esc_url( $image_uri ); ?>">
+				</a>
+				<?php } ?>
+			</div>
+			<?php } ?>
+		</div>
 	</div>
 </div>
+

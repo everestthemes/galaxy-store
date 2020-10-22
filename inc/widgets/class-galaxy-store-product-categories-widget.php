@@ -25,7 +25,7 @@ if ( ! class_exists( 'Galaxy_Store_Product_Categories_Widget' ) ) {
 		 */
 		public function __construct() {
 			$widget_ops = array(
-				'classname'   => 'Galaxy_Store_Product_Categories_Widget',
+				'classname'   => 'Galaxy_Store_Product_Categories_Widget product-cat',
 				'description' => __( 'Product categories listing widget for frontpage section.', 'galaxy-store' ),
 			);
 			parent::__construct( 'Galaxy_Store_Product_Categories_Widget', 'Galaxy Store Product Categories', $widget_ops );

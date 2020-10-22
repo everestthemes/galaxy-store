@@ -1,0 +1,24 @@
+.btn {
+	&--sm {
+		line-height: 2rem;
+		padding: 0 15px;
+		font-size: $font-size-sm;
+	}
+	&--md {
+		line-height: 3em;
+		padding: 0 40px;
+	}
+	&--lg {
+		line-height: 4rem;
+		padding: 0 50px;
+		font-size: $font-size-md;
+	}
+	&--theme {
+		background: var(--theme-color);
+		color: var(--white);
+		&:hover {
+			background: var(--theme-dark-color);
+			color: var(--white);
+		}
+	}
+}

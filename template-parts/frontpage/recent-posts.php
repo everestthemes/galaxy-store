@@ -35,81 +35,73 @@ if ( ! empty( $data['category'] ) ) {
 $the_query = new WP_Query( $args );
 
 ?>
-<div class="blog-posts section_padd60 section-bg1">
-	<div class="container">
-		<?php if ( ! empty( $data['title'] ) ) { ?>
-		<div class="section-header">
-			<span><?php echo esc_html( $data['title'] ); ?></span>
-		</div>
-		<?php } ?>
-
-		<div class="owl-carousel blog-slider">
-			<?php
-			while ( $the_query->have_posts() ) {
-				$the_query->the_post();
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<header class="frontpage-widget__header flex">
+				<h4>
+					<?php if ( ! empty( $data['title'] ) ) { ?>
+						<span><?php echo esc_html( $data['title'] ); ?></span>
+					<?php } ?>
+				</h4>
+				<a href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>" class="btn-view-all"><?php esc_html_e( 'View All', 'galaxy-store' ); ?></a>
+			</header>
+			<div class="owl-carousel recent-post__slider">
+				<?php
+					while ( $the_query->have_posts() ) {
+					$the_query->the_post();
 				?>
-				<div class="item">
-					<div class="single-blog-post">
-
+				<div class="recent-post__slider__item">
+					<figure>
 						<?php if ( has_post_thumbnail() ) { ?>
-							<div class="blog-media">
-								<?php the_post_thumbnail(); ?>
-							</div>
+						<div class="fig-img">
+							<?php the_post_thumbnail(); ?>
+							<a class="recent-post-overlay" href="<?php the_permalink(); ?>"><span>View Details</span></a>
+						</div>
+						<?php } else { ?>
+							<div class="fig-img fig-img--no"><i class="icon icon-file-image"></i></div>
+							<a class="recent-post-overlay" href="<?php the_permalink(); ?>"><span>View Details</span></a>
 						<?php } ?>
-
-						<div class="blog-content">
-							<div class="user-section">
-
-								<div class="user-img">
-									<?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?>
-								</div>
-
-								<ul class="blog-page-meta">
-
+						<figcaption>
+							<div class="recent-post-user flex">
+								<div class="recent-post-user__img"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div>
+								<div class="recent-post-user__info">
 									<?php if ( empty( $data['hide_author_name'] ) ) { ?>
-										<li class="author">
-											<a href="<?php the_permalink(); ?>">
-												<?php the_author(); ?>
-											</a>
-										</li>
+										<a href="<?php the_permalink(); ?>">
+											<i class="icon icon-user-3"></i><?php the_author(); ?>
+										</a>
 									<?php } ?>
-
 									<?php if ( empty( $data['hide_post_date'] ) ) { ?>
-										<li class="date">
-											<a href="<?php the_permalink(); ?>">
-												<i class="icon-calendar"></i> <?php echo esc_html( get_the_date() ); ?>
-											</a>
-										</li>
+										<div class="date">
+												<i class="icon icon-calendar"></i> <?php echo esc_html( get_the_date() ); ?>
+										</div>
 									<?php } ?>
-
-								</ul>
+								</div>
 							</div>
-
 							<?php if ( empty( $data['hide_category_name'] ) ) { ?>
-								<div class="cat-tags">
+								<div class="recent-post-tags">
 									<?php the_category(); ?>
 								</div>
 							<?php } ?>
 
 							<?php
 							the_title(
-								'<h4 class="blog-title"><a href="' . esc_url( get_the_permalink() ) . '">',
-								'</a></h4>'
+								'<h5 class="blog-title"><a href="' . esc_url( get_the_permalink() ) . '">',
+								'</a></h5>'
 							);
 
 							the_excerpt();
 							?>
 
-						</div>
-					</div>
+						</figcaption>
+
+					</figure>
 				</div>
-
-				<?php
-			}
-			?>
-
+				<?php } ?>
+			</div>
 		</div>
 	</div>
 </div>
+
 <?php
 wp_reset_postdata();

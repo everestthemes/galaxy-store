@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $call_to_actions = ! empty( $data['layout_two'] ) ? $data['layout_two'] : array();
 
-?>
+?>sdfsdfds
 <div class="offer section_padd60">
 	<div class="container">
 		<div class="row">

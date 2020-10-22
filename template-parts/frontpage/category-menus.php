@@ -22,19 +22,16 @@ if ( empty( $data['product_categories'] ) ) {
 }
 
 ?>
-<div class="section_padd60">
-	<div class="container">
-
-		<?php if ( ! empty( $data['title'] ) ) { ?>
-			<div class="product-header">
-				<span><?php echo esc_html( $data['title'] ); ?></span>
-			</div>
-		<?php } ?>
-
-		<div class="tab-wrapper layout-1">
-
-			<div class="tab-nav">
-				<ul>
+<div class="container">
+	<div class="row">
+		<div class="col tab-wrapper">
+			<header class="frontpage-widget__header flex">
+				<h4>
+					<?php if ( ! empty( $data['title'] ) ) { ?>
+						<span><?php echo esc_html( $data['title'] ); ?></span>
+					<?php } ?>
+				</h4>
+				<ul class="product-cat-menu__tab">
 					<?php
 					if ( is_array( $data['product_categories'] ) && ! empty( $data['product_categories'] ) ) {
 						foreach ( $data['product_categories'] as $index => $product_category ) {
@@ -49,16 +46,15 @@ if ( empty( $data['product_categories'] ) ) {
 					}
 					?>
 				</ul>
-			</div>
+			</header>
 
-			<div class="tab-entry">
+			<div class="product-cat-menu__cnt">
 				<?php
 				if ( is_array( $data['product_categories'] ) && ! empty( $data['product_categories'] ) ) {
 					foreach ( $data['product_categories'] as $index => $product_category ) {
 						?>
-						<div id="<?php echo esc_attr( $product_category ); ?>" class="tab-content">
-							<div class="woocommerce columns-4">
-								<ul class="products">
+						<div id="<?php echo esc_attr( $product_category ); ?>" class="product-cat-menu__cnt__item">
+								<ul class="flex ">
 									<?php
 
 									$args = array(
@@ -82,48 +78,36 @@ if ( empty( $data['product_categories'] ) ) {
 										$price_html        = is_object( $wc_product_detail ) ? $wc_product_detail->get_price_html() : '';
 
 										?>
-										<li class="product">
-											<div class="lay-prod-wrap">
-												<div class="img-holder">
+										<li>
+											<figure>
+												<div class="fig-img">
 													<?php the_post_thumbnail( array( 250, 250 ) ); ?>
-													<div class="prod-hover">
-														<ul>
-															<?php if ( ! empty( $data['enable_quick_search'] ) ) { ?>
-																<li>
-																	<?php get_template_part( 'addonify/addonify-quick-view-button' ); ?>
-																</li>
-															<?php } ?>
+													<div class="fig-img__hover">
+														<?php if ( ! empty( $data['enable_quick_search'] ) ) { ?>
+															<div class="fig-img__hover__list">
+																<?php get_template_part( 'addonify/addonify-quick-view-button' ); ?>
+															</div>
+														<?php } ?>
 
-															<?php if ( ! empty( $data['enable_wishlist'] ) ) { ?>
-																<li>
-																	<a href="">
-																		<i class="icon-heart"></i>
-																	</a>
-																</li>
-															<?php } ?>
-														</ul>
+														<?php if ( ! empty( $data['enable_wishlist'] ) ) { ?>
+															<a class="fig-img__hover__list">
+																<i class="icon-heart"></i>
+															</a>
+														<?php } ?>
 													</div>
 												</div>
-												<div class="prod-info">
+												<figcaption>
 													<?php
 													the_title(
-														'<h2><a href="' . esc_url( get_the_permalink() ) . '">',
-														'</a></h2>'
+														'<h5><a href="' . esc_url( get_the_permalink() ) . '">',
+														'</a></h5>'
 													);
 
 													?>
-													<div class="wrapp-product-price">
-														<span class="price">
-															<?php echo $price_html; // phpcs:ignore ?>
-														</span>
-													</div>
-
-													<div class="addcart">
-														<?php woocommerce_template_loop_add_to_cart(); ?>
-													</div>
-
-												</div>
-											</div>
+													<div class="price"><?php echo $price_html; // phpcs:ignore ?></div>
+													<div class="add-cart"><?php woocommerce_template_loop_add_to_cart(); ?></div>
+												</figcaption>
+											</figure>
 										</li>
 
 										<?php
@@ -132,7 +116,6 @@ if ( empty( $data['product_categories'] ) ) {
 									wp_reset_postdata();
 									?>
 								</ul>
-							</div>
 						</div>
 						<?php
 					}
@@ -142,3 +125,4 @@ if ( empty( $data['product_categories'] ) ) {
 		</div>
 	</div>
 </div>
+

@@ -190,7 +190,7 @@ add_filter( 'woocommerce_add_to_cart_fragments', 'galaxy_store_woocommerce_cart_
  */
 function galaxy_store_add_to_cart_button_html( $button, $product, $args ) {
 	$button = sprintf(
-		'<a href="%s" data-quantity="%s" class="bg-button %s" %s><i class="icon-bag"></i> %s</a>',
+		'<a href="%s" data-quantity="%s" class="btn btn--sm btn--theme %s" %s><i class="icon-bag"></i> %s</a>',
 		esc_url( $product->add_to_cart_url() ),
 		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
 		esc_attr( isset( $args['class'] ) ? $args['class'] : 'button' ),
